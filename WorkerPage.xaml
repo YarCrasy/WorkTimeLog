@@ -14,5 +14,6 @@
         </HorizontalStackLayout>
         <Switch x:Name="isEntry"/>
         <Button Text="saveDate" Clicked="LogTimeClicked"/>
+        <StackLayout x:Name="workLogStackLayout" Spacing="10"/>
     </VerticalStackLayout>
 </ContentPage>
