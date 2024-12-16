@@ -29,7 +29,7 @@
                     x:Name="UserPicker"
                     SelectedIndexChanged="UserPickerSelection">
                     <Picker.Items>
-                        <x:String>New User</x:String>
+                        <x:String>+New User</x:String>
                     </Picker.Items>
                 </Picker>
             </Grid>

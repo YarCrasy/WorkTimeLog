@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkTimeLog.WorkerPage"
+             Title="WorkerPage">
+    <VerticalStackLayout Margin="20" Spacing="10">
+        <HorizontalStackLayout Spacing="10">
+            <Label Text="Worker: " x:Name="workerName"/>
+            <Label Text="NIF: " x:Name="workerNif"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="10">
+            <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
+            <TimePicker x:Name="timePicker" Format="HH:mm"/>
+        </HorizontalStackLayout>
+        <Switch x:Name="isEntry"/>
+        <Button Text="saveDate" Clicked="LogTimeClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

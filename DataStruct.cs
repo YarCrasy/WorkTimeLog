@@ -16,7 +16,7 @@ namespace WorkTimeLog
         public string Id { get; set; }
         public string UserNif { get; set; }
         public DateTime Date { get; set; }
-        public string IsEntry { get; set; }
+        public bool IsEntry { get; set; }
     }
 
 }

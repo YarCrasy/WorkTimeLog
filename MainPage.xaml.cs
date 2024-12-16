@@ -51,15 +51,15 @@
 
             if (usuario != null && usuario.Password == contraseñaIngresada)
             {
-                // Inicio de sesión exitoso
-                await DisplayAlert("Éxito", "Has iniciado sesión correctamente.", "OK");
                 // Aquí puedes navegar a otra página o realizar alguna acción
+                await Navigation.PushAsync(new WorkerPage(usuario));
             }
             else
             {
                 // Credenciales incorrectas
                 await DisplayAlert("Error", "Usuario o contraseña incorrectos.", "OK");
             }
+            password.Text = string.Empty;
         }
     }
 
