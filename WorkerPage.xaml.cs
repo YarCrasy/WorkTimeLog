@@ -40,17 +40,19 @@ public partial class WorkerPage : ContentPage
     {
         workLogStackLayout.Children.Clear();
 
-        using (AppDbContext db = new())
+        using AppDbContext db = new();
+        List<WorkLog> workLogs = [.. db.WorkLogs.Where(w => w.UserNif == user.Nif)];
+        string aux;
+        for (int i = 0; i < workLogs.Count; i++)
         {
-            var workLogs = db.WorkLogs.Where(w => w.UserNif == user.Nif).ToList();
+            aux = workLogs[i].Date + "";
+            if (workLogs[i].IsEntry) aux += " Entrada";
+            else aux += " Salida";
 
-            foreach (var log in workLogs)
+            workLogStackLayout.Children.Add(new Label
             {
-                workLogStackLayout.Children.Add(new Label
-                {
-                    Text = $"Fecha: {log.Date}, Entrada: {log.IsEntry}"
-                });
-            }
+                Text = aux
+            });
         }
     }
 }

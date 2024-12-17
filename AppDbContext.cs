@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace WorkTimeLog
 {
     public class AppDbContext : DbContext
@@ -9,7 +11,14 @@ namespace WorkTimeLog
         public AppDbContext()
         {
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _databasePath = Path.Combine(folderPath, "worktimelog.db");
+            _databasePath = Path.Combine(folderPath, "worktimelog.sqlite");
+            Debug.WriteLine(_databasePath);
+
+        }
+
+        internal string GetDatabasePath()
+        {
+            return _databasePath;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
