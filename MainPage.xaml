@@ -30,6 +30,7 @@
                     SelectedIndexChanged="UserPickerSelection">
                     <Picker.Items>
                         <x:String>+ New User</x:String>
+                        <x:String>Admin</x:String>
                     </Picker.Items>
                 </Picker>
             </Grid>

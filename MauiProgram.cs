@@ -12,9 +12,8 @@
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-
-            using AppDbContext db = new();
-            db.Database.EnsureCreated();
+            // Registrar AppDbContext como un servicio singleton
+            builder.Services.AddSingleton<AppDbContext>();
 
             return builder.Build();
         }

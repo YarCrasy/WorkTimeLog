@@ -2,16 +2,17 @@
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+
+        public MainPage(AppDbContext db)
         {
             InitializeComponent();
+            Database = db; // Asignar la instancia a la propiedad estática
             LoadUsers();
         }
 
         private async void LoadUsers()
         {
-            using AppDbContext db = new();
-            var usuarios = await db.Users.ToListAsync();
+            List<User> usuarios = await Database.GetUsersAsync();
 
             foreach (var usuario in usuarios)
             {
@@ -21,11 +22,10 @@
 
         private async void UserPickerSelection(object sender, EventArgs e)
         {
-            Picker picker = (Picker)sender;
-            PlaceholderLabel.IsVisible = picker.SelectedIndex == -1 ? true : false;
-            if (picker.SelectedIndex == 0)
+            PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1 ? true : false;
+            if (UserPicker.SelectedIndex == 0)
             {
-                picker.SelectedIndex = -1;
+                UserPicker.SelectedIndex = -1;
                 await Navigation.PushAsync(new RegisterPage(this));
             }
         }
@@ -37,8 +37,8 @@
 
         private async void LoginButtonClicked(object sender, EventArgs e)
         {
-            string? nombreUsuario = (string?)UserPicker.SelectedItem;
-            string? contraseñaIngresada = password.Text;
+            string nombreUsuario = (string)UserPicker.SelectedItem;
+            string contraseñaIngresada = password.Text;
 
             if (string.IsNullOrEmpty(nombreUsuario) || string.IsNullOrEmpty(contraseñaIngresada))
             {
@@ -46,17 +46,16 @@
                 return;
             }
 
-            using AppDbContext db = new();
-            User? usuario = await db.Users.FirstOrDefaultAsync(u => u.NameSurname == nombreUsuario);
+            User? usuario = await Database.GetUserByNameAsync(nombreUsuario);
 
             if (usuario != null && usuario.Password == contraseñaIngresada)
             {
-                // Aquí puedes navegar a otra página o realizar alguna acción
-                await Navigation.PushAsync(new WorkerPage(usuario));
+                
+                if(usuario.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(usuario));
+                else await Navigation.PushAsync(new AdminPage());
             }
             else
             {
-                // Credenciales incorrectas
                 await DisplayAlert("Error", "Usuario o contraseña incorrectos.", "OK");
             }
             password.Text = string.Empty;

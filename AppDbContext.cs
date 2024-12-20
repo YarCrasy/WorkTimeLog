@@ -1,39 +1,93 @@
 using SQLite;
-using System.IO;
 
 namespace WorkTimeLog
 {
     public class AppDbContext
     {
-        private readonly string databasePath;
-        private readonly SQLiteConnection database;
+        public static AppDbContext Database;
+
+        private readonly SQLiteAsyncConnection _database;
 
         public AppDbContext()
         {
-            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            databasePath = Path.Combine(folderPath, "worktimelog.db");
-            database = new SQLiteConnection(databasePath);
-            database.CreateTable<User>();
-            database.CreateTable<WorkLog>();
+            if(Database != null)
+            {
+                Database = this;
+            }
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "worktimelog.db");
+
+            // Verificar si la base de datos ya existe
+            bool dbExists = File.Exists(dbPath);
+
+            _database = new SQLiteAsyncConnection(dbPath);
+
+            if (!dbExists)
+            {
+                // Crear las tablas si la base de datos no existe
+                _database.CreateTableAsync<User>().Wait();
+                User admin = new()
+                {
+                    Nif = "Admin",
+                    NameSurname = "Admin",
+                    Password = "123",
+                    LastIsEntry = false
+                };
+                InsertUserAsync(admin);
+                _database.CreateTableAsync<WorkLog>().Wait();
+            }
         }
 
-        public TableQuery<User> Users => database.Table<User>();
-        public TableQuery<WorkLog> WorkLogs => database.Table<WorkLog>();
-
-        internal string GetDatabasePath()
+        public Task<List<User>> GetUsersAsync()
         {
-            return databasePath;
+            return _database.Table<User>().ToListAsync();
         }
 
-        public void InsertUser(User user)
+        public Task<int> InsertUserAsync(User user)
         {
-            database.Insert(user);
+            return _database.InsertAsync(user);
         }
 
-        public void InsertWorkLog(WorkLog workLog)
+        public Task<int> DropUserAsync(User user)
         {
-            database.Insert(workLog);
+            return _database.DeleteAsync(user);
         }
+
+        public Task<User> GetUserByNifAsync(string nif)
+        {
+            return _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
+        }
+
+        public Task<User> GetUserByNameAsync(string name)
+        {
+            return _database.Table<User>().Where(u => u.NameSurname == name).FirstOrDefaultAsync();
+        }
+
+        public Task<bool> UserExist(User user)
+        {
+            return _database.Table<User>().Where(u => u.Nif == user.Nif || u.NameSurname == user.NameSurname).CountAsync().ContinueWith(t => t.Result > 0);
+        }
+
+        public Task<int> InsertWorkLogAsync(WorkLog workLog)
+        {
+            return _database.InsertAsync(workLog);
+        }
+
+        public Task<List<WorkLog>> GetWorkLogsAsync()
+        {
+            return _database.Table<WorkLog>().ToListAsync();
+        }
+
+        public Task<int> UpdateUserAsync(User user)
+        {
+            return _database.UpdateAsync(user);
+        }
+
+        public Task<List<WorkLog>> GetWorkLogsByUserNifAsync(string userNif)
+        {
+            return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
+        }
+
+
 
     }
 }

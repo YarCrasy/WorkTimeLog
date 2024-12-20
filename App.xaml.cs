@@ -5,10 +5,6 @@
         public App()
         {
             InitializeComponent();
-
-            using AppDbContext db = new();
-            db.Database.EnsureCreated();
-
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
