@@ -1,26 +1,39 @@
+using SQLite;
+using System.IO;
+
 namespace WorkTimeLog
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext
     {
-        private readonly string _databasePath;
-        public DbSet<User> Users { get; set; }
-        public DbSet<WorkLog> WorkLogs { get; set; }
+        private readonly string databasePath;
+        private readonly SQLiteConnection database;
 
         public AppDbContext()
         {
-            var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _databasePath = Path.Combine(folderPath, "worktimelog.db");
-
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            databasePath = Path.Combine(folderPath, "worktimelog.db");
+            database = new SQLiteConnection(databasePath);
+            database.CreateTable<User>();
+            database.CreateTable<WorkLog>();
         }
+
+        public TableQuery<User> Users => database.Table<User>();
+        public TableQuery<WorkLog> WorkLogs => database.Table<WorkLog>();
 
         internal string GetDatabasePath()
         {
-            return _databasePath;
+            return databasePath;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public void InsertUser(User user)
         {
-            optionsBuilder.UseSqlite($"Data Source={_databasePath}");
+            database.Insert(user);
         }
+
+        public void InsertWorkLog(WorkLog workLog)
+        {
+            database.Insert(workLog);
+        }
+
     }
 }

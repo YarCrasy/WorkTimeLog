@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SQLite;
 
 namespace WorkTimeLog
 {
     public class User
     {
-        [Key]
+        [PrimaryKey]
         public string Nif { get; set; }
         public string NameSurname { get; set; }
         public string Password { get; set; }
@@ -13,8 +13,8 @@ namespace WorkTimeLog
 
     public class WorkLog
     {
-        [Key]
-        public string Id { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public string UserNif { get; set; }
         public DateTime Date { get; set; }
         public bool IsEntry { get; set; }
