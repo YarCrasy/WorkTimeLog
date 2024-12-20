@@ -15,7 +15,8 @@ public partial class RegisterPage : ContentPage
         {
             Nif = nif.Text,
             NameSurname = userNameRegister.Text,
-            Password = passwordRegister.Text
+            Password = passwordRegister.Text,
+            LastIsEntry = false
         };
         string confirmPassword = confirmPasswordRegister.Text;
 
@@ -24,6 +25,11 @@ public partial class RegisterPage : ContentPage
             string.IsNullOrEmpty(newUser.Password))
         {
             await DisplayAlert("Error", "Faltan campos por rellenar", "OK");
+            return;
+        }
+        else if (IsUserExisting(newUser))
+        {
+            await DisplayAlert("Error", "El nombre o nif del usuario ya exsiste", "OK");
             return;
         }
         else if (newUser.Password != confirmPassword)
@@ -42,4 +48,11 @@ public partial class RegisterPage : ContentPage
         mainPage.AddUser(newUser);
         await Navigation.PopAsync();
     }
+
+    private bool IsUserExisting(User newUser)
+    {
+        AppDbContext db = new();
+        return db.Users.Any(u => u.Nif == newUser.Nif || u.NameSurname == newUser.NameSurname); ;
+    }
+
 }

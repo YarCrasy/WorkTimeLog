@@ -5,10 +5,10 @@
         public MainPage()
         {
             InitializeComponent();
-            CargarUsuarios();
+            LoadUsers();
         }
 
-        private async void CargarUsuarios()
+        private async void LoadUsers()
         {
             using AppDbContext db = new();
             var usuarios = await db.Users.ToListAsync();

@@ -4,15 +4,17 @@ public partial class WorkerPage : ContentPage
 {
     readonly User user;
 
-    public WorkerPage(User user)
+    public WorkerPage(User u)
     {
         InitializeComponent();
-        this.user = user;
+        user = u;
         workerName.Text += user.NameSurname;
         workerNif.Text += user.Nif;
 
         datePicker.Date = DateTime.Now.Date;
         timePicker.Time = DateTime.Now.TimeOfDay;
+        if (user.LastIsEntry) isEntry.IsToggled = false;
+        else isEntry.IsToggled = true;
 
         LoadWorkLogs();
     }
@@ -31,13 +33,18 @@ public partial class WorkerPage : ContentPage
         using (AppDbContext db = new())
         {
             db.WorkLogs.Add(workLog);
+            db.Users.Update(user);
             await db.SaveChangesAsync();
         }
+
 
         Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm") };
 
         if (workLog.IsEntry) entry.Children.Add(label);
         else exit.Children.Add(label);
+
+        await DisplayAlert("Éxito", "Fecha y hora registrado correctamente.", "OK");
+        await Navigation.PopAsync();
     }
 
     private void LoadWorkLogs()
