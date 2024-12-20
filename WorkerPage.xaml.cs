@@ -2,7 +2,7 @@ namespace WorkTimeLog;
 
 public partial class WorkerPage : ContentPage
 {
-    User user;
+    readonly User user;
 
     public WorkerPage(User user)
     {
@@ -19,6 +19,7 @@ public partial class WorkerPage : ContentPage
 
     private async void LogTimeClicked(object sender, EventArgs e)
     {
+
         WorkLog workLog = new()
         {
             Id = Guid.NewGuid().ToString(),
@@ -33,26 +34,24 @@ public partial class WorkerPage : ContentPage
             await db.SaveChangesAsync();
         }
 
-        LoadWorkLogs();
+        Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm") };
+
+        if (workLog.IsEntry) entry.Children.Add(label);
+        else exit.Children.Add(label);
     }
 
     private void LoadWorkLogs()
     {
-        workLogStackLayout.Children.Clear();
-
+        entry.Children.Clear();
+        exit.Children.Clear();
         using AppDbContext db = new();
         List<WorkLog> workLogs = [.. db.WorkLogs.Where(w => w.UserNif == user.Nif)];
-        string aux;
         for (int i = 0; i < workLogs.Count; i++)
         {
-            aux = workLogs[i].Date + "";
-            if (workLogs[i].IsEntry) aux += " Entrada";
-            else aux += " Salida";
+            Label label = new() { Text = workLogs[i].Date.ToString("dd-MM-yyyy HH:mm") };
 
-            workLogStackLayout.Children.Add(new Label
-            {
-                Text = aux
-            });
+            if (workLogs[i].IsEntry) entry.Children.Add(label);
+            else exit.Children.Add(label);
         }
     }
 }

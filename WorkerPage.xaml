@@ -3,17 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkTimeLog.WorkerPage"
              Title="WorkerPage">
-    <VerticalStackLayout Margin="20" Spacing="10">
-        <HorizontalStackLayout Spacing="10">
-            <Label Text="Worker: " x:Name="workerName"/>
-            <Label Text="NIF: " x:Name="workerNif"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout Spacing="10">
-            <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
-            <TimePicker x:Name="timePicker" Format="HH:mm"/>
-        </HorizontalStackLayout>
-        <Switch x:Name="isEntry"/>
-        <Button Text="saveDate" Clicked="LogTimeClicked"/>
-        <StackLayout x:Name="workLogStackLayout" Spacing="10"/>
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
+            <HorizontalStackLayout Spacing="10" Margin="10">
+                <Label Text="Worker: " x:Name="workerName"/>
+                <Label Text="NIF: " x:Name="workerNif"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
+                <TimePicker x:Name="timePicker" Format="HH:mm"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <Label VerticalOptions="Center">Entry</Label>
+                <Switch x:Name="isEntry" WidthRequest="100"/>
+            </HorizontalStackLayout>
+            <Button Text="Save" Clicked="LogTimeClicked"/>
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1" Margin="10">
+            <VerticalStackLayout Spacing="10">
+                <Grid x:Name="logContainer">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Entrada" Grid.Column="0" FontAttributes="Bold"/>
+                    <VerticalStackLayout Grid.Column="0" Spacing="10" x:Name="entry" HorizontalOptions="Center">
+                    </VerticalStackLayout>
+                    <Label Text="Salida" Grid.Column="1" FontAttributes="Bold"/>
+                    <VerticalStackLayout Grid.Column="1" Spacing="10" x:Name="exit" HorizontalOptions="Center">
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

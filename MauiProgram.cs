@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace WorkTimeLog
+﻿namespace WorkTimeLog
 {
     public static class MauiProgram
     {
