@@ -32,12 +32,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Text="Entrada" Grid.Column="0" FontAttributes="Bold"/>
-                    <VerticalStackLayout Grid.Column="0" Spacing="10" x:Name="entry" HorizontalOptions="Center">
-                    </VerticalStackLayout>
-                    <Label Text="Salida" Grid.Column="1" FontAttributes="Bold"/>
-                    <VerticalStackLayout Grid.Column="1" Spacing="10" x:Name="exit" HorizontalOptions="Center">
-                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="0" Spacing="10" x:Name="entry" HorizontalOptions="Center"/>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="10" x:Name="exit" HorizontalOptions="Center"/>
+
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

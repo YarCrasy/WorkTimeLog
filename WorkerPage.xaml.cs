@@ -44,6 +44,13 @@ public partial class WorkerPage : ContentPage
     {
         entry.Children.Clear();
         exit.Children.Clear();
+
+        Label EntryLabel = new() { Text = "Entrada", FontAttributes = FontAttributes.Bold };
+        entry.Children.Add(EntryLabel);
+
+        Label exitLabel = new() { Text = "Salida", FontAttributes = FontAttributes.Bold };
+        exit.Children.Add(exitLabel);
+
         using AppDbContext db = new();
         List<WorkLog> workLogs = [.. db.WorkLogs.Where(w => w.UserNif == user.Nif)];
         for (int i = 0; i < workLogs.Count; i++)
