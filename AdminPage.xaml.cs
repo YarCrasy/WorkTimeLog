@@ -23,7 +23,7 @@ public partial class AdminPage : ContentPage
 
     private async void ViewUsersButtonClicked(object sender, EventArgs e)
     {
-        // Lógica para ver usuarios y sus registros
-        await DisplayAlert("Ver Usuarios", "Funcionalidad para ver usuarios y registros no implementada.", "OK");
+        // Navegar a la página UsersListPage
+        await Navigation.PushAsync(new UsersListPage());
     }
 }
