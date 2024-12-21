@@ -17,13 +17,11 @@ public partial class AdminPage : ContentPage
 
     private async void DeleteUserButtonClicked(object sender, EventArgs e)
     {
-        // Lógica para eliminar un usuario
         await DisplayAlert("Eliminar Usuario", "Funcionalidad para eliminar usuario no implementada.", "OK");
     }
 
     private async void ViewUsersButtonClicked(object sender, EventArgs e)
     {
-        // Navegar a la página UsersListPage
         await Navigation.PushAsync(new UsersListPage());
     }
 }

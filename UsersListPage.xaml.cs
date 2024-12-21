@@ -10,8 +10,7 @@ public partial class UsersListPage : ContentPage
 
     private async void LoadUsers()
     {
-        List<User> users = await AppDbContext.Database.GetUsersAsync();
+        List<User> users = await Database.GetUsersAsync();
         users = users.Where(u => u.Nif != "Admin").ToList();
-        UsersCollectionView.ItemsSource = users;
     }
 }

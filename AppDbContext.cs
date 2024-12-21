@@ -10,7 +10,7 @@ namespace WorkTimeLog
 
         public AppDbContext()
         {
-            if(Database != null)
+            if (Database != null)
             {
                 Database = this;
             }
@@ -20,20 +20,24 @@ namespace WorkTimeLog
             bool dbExists = File.Exists(dbPath);
 
             _database = new SQLiteAsyncConnection(dbPath);
+            User admin = new()
+            {
+                Nif = "Admin",
+                NameSurname = "Admin",
+                Password = "123",
+                LastIsEntry = false
+            };
 
             if (!dbExists)
             {
                 // Crear las tablas si la base de datos no existe
                 _database.CreateTableAsync<User>().Wait();
-                User admin = new()
-                {
-                    Nif = "Admin",
-                    NameSurname = "Admin",
-                    Password = "123",
-                    LastIsEntry = false
-                };
                 InsertUserAsync(admin);
                 _database.CreateTableAsync<WorkLog>().Wait();
+            }
+            else if(!UserExist(admin).Result)
+            {
+                InsertUserAsync(admin);
             }
         }
 
@@ -86,8 +90,6 @@ namespace WorkTimeLog
         {
             return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
         }
-
-
 
     }
 }

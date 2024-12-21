@@ -3,21 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkTimeLog.AdminPage"
              Title="AdminPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout Spacing="10">
         <Button 
             Text="Crear Nuevo Usuario"
             Clicked="CreateUserButtonClicked"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            WidthRequest="600"/>
         <Button 
             Text="Eliminar Usuario"
             Clicked="DeleteUserButtonClicked"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            WidthRequest="600"/>
         <Button 
             Text="Ver Usuarios y Registros"
             Clicked="ViewUsersButtonClicked"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            WidthRequest="600"/>
     </VerticalStackLayout>
 </ContentPage>

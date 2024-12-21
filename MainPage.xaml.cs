@@ -23,11 +23,6 @@
         private async void UserPickerSelection(object sender, EventArgs e)
         {
             PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1 ? true : false;
-            if (UserPicker.SelectedIndex == 0)
-            {
-                UserPicker.SelectedIndex = -1;
-                await Navigation.PushAsync(new RegisterPage(this));
-            }
         }
 
         internal void AddUser(User user)
@@ -50,7 +45,8 @@
 
             if (usuario != null && usuario.Password == contraseñaIngresada)
             {
-                if(usuario.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(usuario));
+                UserPicker.SelectedIndex = -1;
+                if (usuario.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(usuario));
                 else await Navigation.PushAsync(new AdminPage(this));
             }
             else
