@@ -50,9 +50,8 @@
 
             if (usuario != null && usuario.Password == contraseñaIngresada)
             {
-                
                 if(usuario.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(usuario));
-                else await Navigation.PushAsync(new AdminPage());
+                else await Navigation.PushAsync(new AdminPage(this));
             }
             else
             {

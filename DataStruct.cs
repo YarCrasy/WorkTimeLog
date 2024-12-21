@@ -9,6 +9,11 @@ namespace WorkTimeLog
         public string NameSurname { get; set; }
         public string Password { get; set; }
         public bool LastIsEntry { get; set; }
+
+        public bool IsAdmin()
+        {
+            return NameSurname == "Admin";
+        }
     }
 
     public class WorkLog

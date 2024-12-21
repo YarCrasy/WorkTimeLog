@@ -4,8 +4,19 @@
              x:Class="WorkTimeLog.AdminPage"
              Title="AdminPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
+        <Button 
+            Text="Crear Nuevo Usuario"
+            Clicked="CreateUserButtonClicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button 
+            Text="Eliminar Usuario"
+            Clicked="DeleteUserButtonClicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button 
+            Text="Ver Usuarios y Registros"
+            Clicked="ViewUsersButtonClicked"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>
