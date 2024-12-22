@@ -53,6 +53,7 @@ namespace WorkTimeLog
 
         public Task<int> DropUserAsync(User user)
         {
+            if (user.IsAdmin()) return Task.FromResult(0);
             return _database.DeleteAsync(user);
         }
 
