@@ -11,14 +11,8 @@
             HorizontalOptions="Center"
             WidthRequest="600"/>
         <Button 
-            Text="Eliminar Usuario"
-            Clicked="DeleteUserButtonClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            WidthRequest="600"/>
-        <Button 
-            Text="Ver Usuarios y Registros"
-            Clicked="ViewUsersButtonClicked"
+            Text="Administrar Usuarios"
+            Clicked="ManageUsersButtonClicked"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             WidthRequest="600"/>

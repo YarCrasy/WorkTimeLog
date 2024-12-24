@@ -57,9 +57,9 @@ namespace WorkTimeLog
             return _database.DeleteAsync(user);
         }
 
-        public Task<User> GetUserByNifAsync(string nif)
+        public async Task<User> GetUserByNifAsync(string nif)
         {
-            return _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
+            return await _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
         }
 
         public Task<User> GetUserByNameAsync(string name)

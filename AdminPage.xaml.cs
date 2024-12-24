@@ -15,13 +15,9 @@ public partial class AdminPage : ContentPage
         await Navigation.PushAsync(new RegisterPage(main));
     }
 
-    private async void DeleteUserButtonClicked(object sender, EventArgs e)
-    {
-        await DisplayAlert("Eliminar Usuario", "Funcionalidad para eliminar usuario no implementada.", "OK");
-    }
-
-    private async void ViewUsersButtonClicked(object sender, EventArgs e)
+    private async void ManageUsersButtonClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new UsersListPage());
     }
+
 }

@@ -3,25 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkTimeLog.UsersListPage"
              Title="Lista de Usuarios">
-    <Grid Margin="10" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Label
-            Text="Users1"
-            Grid.Row="0"
-            Grid.Column="0"
-            FontAttributes="Bold"
-            FontSize="20"/>      
-        <Button
-            Text="X"
-            Grid.Row="0"
-            Grid.Column="1"/>
-    </Grid>
+    <VerticalStackLayout Padding="10" Spacing="10" x:Name="UserList">
+        <!-- Fila 1 -->
+        <Border Padding="10" BackgroundColor="AliceBlue" StrokeShape="RoundRectangle 10" Margin="0,0,0,10" ClassId="">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Text="Users1"
+                    Margin="10"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    Grid.Column="0"/>
+                <Button Clicked="DeleteUserButtonClicked" 
+                    Margin="10" Padding="3" 
+                    WidthRequest="15" HorizontalOptions="End"
+                    Grid.Column="1">
+                    <Button.ImageSource>
+                        <FileImageSource File="delete_icon.png"/>
+                    </Button.ImageSource>
+                </Button>
+            </Grid>
+        </Border>
+
+    </VerticalStackLayout>
 </ContentPage>
