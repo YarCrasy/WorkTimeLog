@@ -31,7 +31,7 @@ public partial class WorkerPage : ContentPage
         user.LastIsEntry = workLog.IsEntry;
         await Database.UpdateUserAsync(user);
 
-        Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm") };
+        Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm"), HorizontalOptions = LayoutOptions.Center };
 
         if (workLog.IsEntry) entry.Children.Add(label);
         else exit.Children.Add(label);
@@ -45,18 +45,26 @@ public partial class WorkerPage : ContentPage
         entry.Children.Clear();
         exit.Children.Clear();
 
-        Label entryLabel = new() { Text = "Entrada", FontAttributes = FontAttributes.Bold };
-        entryLabel.HorizontalOptions = LayoutOptions.Fill;
+        Label entryLabel = new()
+        {
+            Text = "Entrada",
+            FontAttributes = FontAttributes.Bold,
+            HorizontalOptions = LayoutOptions.Center
+        };
         entry.Children.Add(entryLabel);
 
-        Label exitLabel = new() { Text = "Salida", FontAttributes = FontAttributes.Bold };
-        exitLabel.HorizontalOptions = LayoutOptions.Fill;
+        Label exitLabel = new()
+        {
+            Text = "Salida",
+            FontAttributes = FontAttributes.Bold,
+            HorizontalOptions = LayoutOptions.Center
+        };
         exit.Children.Add(exitLabel);
 
         List<WorkLog> workLogs = await Database.GetWorkLogsByUserNifAsync(user.Nif);
         foreach (WorkLog workLog in workLogs)
         {
-            Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm") };
+            Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm"), HorizontalOptions = LayoutOptions.Center};
 
             if (workLog.IsEntry) entry.Children.Add(label);
             else exit.Children.Add(label);

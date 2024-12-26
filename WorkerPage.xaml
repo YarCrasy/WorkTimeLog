@@ -25,25 +25,24 @@
         </VerticalStackLayout>
 
         <ScrollView Grid.Row="1" Margin="10">
-            <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite">
+            <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <VerticalStackLayout Grid.Column="0" 
+                <Border BackgroundColor="Green" Grid.Column="0" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout Grid.Column="0" 
                           Spacing="10" 
                           x:Name="entry" 
-                          HorizontalOptions="Center" 
-                          BackgroundColor="Green"
-                          VerticalOptions="FillAndExpand"/>
+                          HorizontalOptions="FillAndExpand"/>
+                </Border>
 
-                <VerticalStackLayout Grid.Column="1" 
+                <Border BackgroundColor="Red" Grid.Column="1" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout Grid.Column="1" 
                           Spacing="10" 
                           x:Name="exit" 
-                          HorizontalOptions="Center" 
-                          BackgroundColor="Red" 
-                          VerticalOptions="FillAndExpand"/>
-
+                          HorizontalOptions="FillAndExpand"/>
+                </Border>
             </Grid>
         </ScrollView>
     </Grid>
