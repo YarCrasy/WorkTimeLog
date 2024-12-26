@@ -20,9 +20,9 @@
             }
         }
 
-        private async void UserPickerSelection(object sender, EventArgs e)
+        private void UserPickerSelection(object sender, EventArgs e)
         {
-            PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1 ? true : false;
+            PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1;
         }
 
         internal void AddUser(User user)
@@ -30,24 +30,29 @@
             UserPicker.Items.Add(user.NameSurname);
         }
 
+        internal void RemoveUser(User user)
+        {
+            UserPicker.Items.Remove(user.NameSurname);
+        }
+
         private async void LoginButtonClicked(object sender, EventArgs e)
         {
-            string nombreUsuario = (string)UserPicker.SelectedItem;
-            string contraseñaIngresada = password.Text;
+            string userName = (string)UserPicker.SelectedItem;
+            string inputPassword = password.Text;
 
-            if (string.IsNullOrEmpty(nombreUsuario) || string.IsNullOrEmpty(contraseñaIngresada))
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(inputPassword))
             {
                 await DisplayAlert("Error", "Por favor, ingresa el usuario y la contraseña.", "OK");
                 return;
             }
 
-            User? usuario = await Database.GetUserByNameAsync(nombreUsuario);
+            User? user = await Database.GetUserByNameAsync(userName);
 
-            if (usuario != null && usuario.Password == contraseñaIngresada)
+            if (user != null && user.Password == inputPassword)
             {
                 UserPicker.SelectedIndex = -1;
-                if (usuario.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(usuario));
-                else await Navigation.PushAsync(new AdminPage(this));
+                if (user.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(user));
+                else await Navigation.PushAsync(new AdminPage(this, user));
             }
             else
             {

@@ -16,5 +16,11 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             WidthRequest="600"/>
+        <Button 
+            Text="Cambiar Contraseña"
+            Clicked="ChangePasswordButtonClicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            WidthRequest="600"/>
     </VerticalStackLayout>
 </ContentPage>

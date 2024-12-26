@@ -4,11 +4,13 @@ namespace WorkTimeLog;
 
 public partial class UsersListPage : ContentPage
 {
+    internal MainPage main;
 
-    public UsersListPage()
+    public UsersListPage(MainPage m)
     {
         InitializeComponent();
         LoadUsers();
+        main = m;
     }
 
     private async void LoadUsers()
@@ -18,13 +20,6 @@ public partial class UsersListPage : ContentPage
 
         foreach (var user in users)
         {
-
-            var grid = new Grid();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new());
-            grid.ColumnDefinitions.Add(new());
-
-
             var userLabel = new Label
             {
                 Text = user.NameSurname + " (" + user.Nif + ")",
@@ -39,21 +34,27 @@ public partial class UsersListPage : ContentPage
             {
                 Margin = 10,
                 Padding = 3,
+                HorizontalOptions = LayoutOptions.End,
                 WidthRequest = 15,
             };
             deleteButton.Clicked += DeleteUserButtonClicked;
             deleteButton.ImageSource = new FileImageSource { File = "delete_icon.png" };
+
+
+            var grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new());
+            grid.ColumnDefinitions.Add(new());
 
             grid.Children.Add(userLabel);
             grid.Children.Add(deleteButton);
             Grid.SetColumn(userLabel, 0);
             Grid.SetColumn(deleteButton, 2);
 
-
             Border userLayout = new()
             {
                 Padding = 10,
-                BackgroundColor = Colors.AliceBlue,
+                BackgroundColor = Colors.Blue,
                 StrokeShape = new RoundRectangle { CornerRadius = 10 },
                 Margin = new Thickness(0, 0, 0, 10),
                 ClassId = user.Nif,
@@ -67,9 +68,8 @@ public partial class UsersListPage : ContentPage
     private async void DeleteUserButtonClicked(object sender, EventArgs e)
     {
         Button deleteButton = (Button)sender;
-
         Border userLayout = (Border)deleteButton.Parent.Parent;
-        if (string.IsNullOrEmpty(userLayout.ClassId))
+        if (!string.IsNullOrEmpty(userLayout.ClassId))
         {
             if (Database.GetUserByNifAsync(userLayout.ClassId) != null)
             {
@@ -77,6 +77,7 @@ public partial class UsersListPage : ContentPage
                 if (u != null) await Database.DropUserAsync(u);
 
                 UserList.Children.Remove(userLayout);
+                main.RemoveUser(u);
 
                 await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", "OK");
             }

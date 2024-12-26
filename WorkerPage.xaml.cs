@@ -46,9 +46,11 @@ public partial class WorkerPage : ContentPage
         exit.Children.Clear();
 
         Label entryLabel = new() { Text = "Entrada", FontAttributes = FontAttributes.Bold };
+        entryLabel.HorizontalOptions = LayoutOptions.Fill;
         entry.Children.Add(entryLabel);
 
         Label exitLabel = new() { Text = "Salida", FontAttributes = FontAttributes.Bold };
+        exitLabel.HorizontalOptions = LayoutOptions.Fill;
         exit.Children.Add(exitLabel);
 
         List<WorkLog> workLogs = await Database.GetWorkLogsByUserNifAsync(user.Nif);

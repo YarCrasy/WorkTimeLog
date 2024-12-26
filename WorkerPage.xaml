@@ -10,10 +10,9 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
-            <HorizontalStackLayout Spacing="10" Margin="10">
-                <Label Text="Worker: " x:Name="workerName"/>
-                <Label Text="NIF: " x:Name="workerNif"/>
-            </HorizontalStackLayout>
+
+            <Label Text="Worker: " x:Name="workerName"/>
+            <Label Text="NIF: " x:Name="workerNif"/>
             <HorizontalStackLayout Spacing="10">
                 <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
                 <TimePicker x:Name="timePicker" Format="HH:mm"/>
@@ -26,18 +25,26 @@
         </VerticalStackLayout>
 
         <ScrollView Grid.Row="1" Margin="10">
-            <VerticalStackLayout Spacing="10">
-                <Grid x:Name="logContainer">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <VerticalStackLayout Grid.Column="0" Spacing="10" x:Name="entry" HorizontalOptions="Center"/>
+            <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" BackgroundColor="AntiqueWhite">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout Grid.Column="0" 
+                          Spacing="10" 
+                          x:Name="entry" 
+                          HorizontalOptions="Center" 
+                          BackgroundColor="Green"
+                          VerticalOptions="FillAndExpand"/>
 
-                    <VerticalStackLayout Grid.Column="1" Spacing="10" x:Name="exit" HorizontalOptions="Center"/>
+                <VerticalStackLayout Grid.Column="1" 
+                          Spacing="10" 
+                          x:Name="exit" 
+                          HorizontalOptions="Center" 
+                          BackgroundColor="Red" 
+                          VerticalOptions="FillAndExpand"/>
 
-                </Grid>
-            </VerticalStackLayout>
+            </Grid>
         </ScrollView>
     </Grid>
 </ContentPage>
