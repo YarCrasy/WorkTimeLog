@@ -1,3 +1,4 @@
+using static LocalizationService;
 namespace WorkTimeLog;
 
 public partial class WorkerPage : ContentPage
@@ -69,5 +70,20 @@ public partial class WorkerPage : ContentPage
             if (workLog.IsEntry) entry.Children.Add(label);
             else exit.Children.Add(label);
         }
+    }
+
+    private async void ChangePasswordButtonClicked(object sender, EventArgs e)
+    {
+        string newPassword =
+                await DisplayPromptAsync(
+                    GetString("ChangePassword"),
+                    GetString("EnterNewPassword"),
+                    GetString("Accept"), GetString("Cancel"),
+                    GetString("NewPassword"), 18, Keyboard.Default);
+
+        if (!user.ChangePassword(newPassword)) return;
+        else await DisplayAlert(GetString("Success"), GetString("PasswordChangedSuccessfully"), "OK");
+
+        await Database.UpdateUserAsync(user);
     }
 }

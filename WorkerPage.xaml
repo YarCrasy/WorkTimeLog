@@ -11,8 +11,24 @@
 
         <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
 
-            <Label Text="Worker: " x:Name="workerName"/>
-            <Label Text="NIF: " x:Name="workerNif"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Worker: " x:Name="workerName" 
+                       Grid.Column="0" Grid.Row="0"/>
+                <Label Text="NIF: " x:Name="workerNif" 
+                       Grid.Column="0" Grid.Row="1"/>
+                <Button Text="cambiar contraseña"
+                        Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
+                        Clicked="ChangePasswordButtonClicked"/>
+            </Grid>
+                
             <HorizontalStackLayout Spacing="10">
                 <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
                 <TimePicker x:Name="timePicker" Format="HH:mm"/>

@@ -1,1 +1,2 @@
-﻿global using static WorkTimeLog.AppDbContext;
+﻿global using System.Globalization;
+global using static WorkTimeLog.AppDbContext;

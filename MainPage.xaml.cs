@@ -1,4 +1,6 @@
-﻿namespace WorkTimeLog
+﻿using static LocalizationService;
+
+namespace WorkTimeLog
 {
     public partial class MainPage : ContentPage
     {
@@ -42,7 +44,7 @@
 
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(inputPassword))
             {
-                await DisplayAlert("Error", "Por favor, ingresa el usuario y la contraseña.", "OK");
+                await DisplayAlert(GetString("Error"), GetString("LoginPrompt"), "OK");
                 return;
             }
 
@@ -56,7 +58,7 @@
             }
             else
             {
-                await DisplayAlert("Error", "Usuario o contraseña incorrectos.", "OK");
+                await DisplayAlert(GetString("Error"), GetString("LoginError"), "OK");
             }
             password.Text = string.Empty;
         }

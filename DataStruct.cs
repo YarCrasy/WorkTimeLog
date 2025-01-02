@@ -14,6 +14,16 @@ namespace WorkTimeLog
         {
             return NameSurname == "Admin";
         }
+
+        public bool ChangePassword(string newPassword)
+        {
+            if (string.IsNullOrEmpty(newPassword)) return false;
+            else
+            {
+                Password = newPassword;
+                return true;
+            }
+        }
     }
 
     public class WorkLog

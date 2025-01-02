@@ -1,3 +1,5 @@
+using Windows.System;
+
 namespace WorkTimeLog;
 
 public partial class AdminPage : ContentPage
@@ -24,12 +26,16 @@ public partial class AdminPage : ContentPage
 
     private async void ChangePasswordButtonClicked(object sender, EventArgs e)
     {
-        admin.Password = 
-            await DisplayPromptAsync(
-                "Cambiar contraseña", 
-                "Introduce la nueva contraseña", 
-                "Aceptar", "Cancelar", 
-                "Nueva contraseña", 18, Keyboard.Default, admin.Password);
+        string newPassword =
+                await DisplayPromptAsync(
+                    "Cambiar contraseña",
+                    "Introduce la nueva contraseña",
+                    "Aceptar", "Cancelar",
+                    "Nueva contraseña", 18, Keyboard.Default);
+
+        if (!admin.ChangePassword(newPassword)) return;
+        else await DisplayAlert("Éxito", "Contraseña cambiada correctamente.", "OK");
+
         await Database.UpdateUserAsync(admin);
     }
 }
