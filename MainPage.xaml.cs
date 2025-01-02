@@ -44,7 +44,7 @@ namespace WorkTimeLog
 
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(inputPassword))
             {
-                await DisplayAlert(GetString("Error"), GetString("LoginPrompt"), "OK");
+                await DisplayAlert("Error", GetString("LoginPrompt"), "OK");
                 return;
             }
 
@@ -58,7 +58,7 @@ namespace WorkTimeLog
             }
             else
             {
-                await DisplayAlert(GetString("Error"), GetString("LoginError"), "OK");
+                await DisplayAlert("Error", GetString("LoginError"), "OK");
             }
             password.Text = string.Empty;
         }
