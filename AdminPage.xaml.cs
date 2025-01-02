@@ -1,5 +1,3 @@
-using Windows.System;
-
 namespace WorkTimeLog;
 
 public partial class AdminPage : ContentPage
