@@ -2,78 +2,51 @@
 bin/
 obj/
 
-# Archivos de usuario de Visual Studio
-.vscode/
-.vs/
+# Archivos de paquete
+*.nupkg
+*.snupkg
+
+# Paquetes NuGet instalados localmente
+packages/
+*.nuget/
+
+# Archivos de usuario y configuraciones personales
 *.user
-*.userosscache
 *.suo
-*.sln.docstates
+*.userprefs
 
-# Archivos de configuración de Mac
-.idea/
-*.DS_Store
+# Configuraciones de Visual Studio
+.vs/
+*.vssscc
+*.vspscc
 
-# Archivos de configuración de Windows
+# Archivos de depuración y registros
+*.log
+*.tlog
+
+# Directorios de publicación y empaquetado
+publish/
+AppPackages/
+PackageTmp/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.cache
+
+# Archivos generados del paquete de app
+*.apk
+*.aab
+*.ipa
+*.app
+
+# Archivos del sistema
 Thumbs.db
 ehthumbs.db
+[Dd]esktop.ini
 
-# Archivos de configuración de Android
-*.apk
-*.ap_
-*.dex
-*.class
-*.jar
-*.keystore
-*.so
-*.zipalign
+# Archivos para macOS
+*.DS_Store
 
-# Archivos de configuración de iOS
-*.ipa
-*.dSYM.zip
-*.dSYM
-
-# Archivos de configuración de MAUI
-AppPackages/
-AppPackagesBackup/
-AppPackagesStaging/
-AppPackagesTest/
-AppPackagesTestBackup/
-AppPackagesTestStaging/
-
-# Archivos de configuración de Tizen
-*.tpk
-*.tpk.xml
-*.tpk.sig
-
-# Archivos de configuración de Xamarin
-*.xamarin
-*.xamarin.android
-*.xamarin.ios
-*.xamarin.mac
-*.xamarin.watchos
-*.xamarin.tvos
-*.xamarin.forms
-*.xamarin.forms.android
-*.xamarin.forms.ios
-*.xamarin.forms.mac
-*.xamarin.forms.watchos
-*.xamarin.forms.tvos
-
-# Archivos de configuración de MAUI
-*.maui
-*.maui.android
-*.maui.ios
-*.maui.mac
-*.maui.watchos
-*.maui.tvos
-*.maui.forms
-*.maui.forms.android
-*.maui.forms.ios
-*.maui.forms.mac
-*.maui.forms.watchos
-*.maui.forms.tvos
-
-# Archivos de configuración de Rider
-.idea/
-*.sln.iml
+# Archivos de configuración local
+local.settings.json
