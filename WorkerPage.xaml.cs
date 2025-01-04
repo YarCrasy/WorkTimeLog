@@ -1,4 +1,3 @@
-using static LocalizationService;
 namespace WorkTimeLog;
 
 public partial class WorkerPage : ContentPage
@@ -9,19 +8,22 @@ public partial class WorkerPage : ContentPage
     {
         InitializeComponent();
         user = u;
+        InitializeUI();
+        LoadWorkLogs();
+    }
+
+    private void InitializeUI()
+    {
         workerName.Text += user.NameSurname;
         workerNif.Text += user.Nif;
-
         datePicker.Date = DateTime.Now.Date;
         timePicker.Time = DateTime.Now.TimeOfDay;
         isEntry.IsToggled = !user.LastIsEntry;
-
-        LoadWorkLogs();
     }
 
     private async void LogTimeClicked(object sender, EventArgs e)
     {
-        WorkLog workLog = new()
+        var workLog = new WorkLog
         {
             UserNif = user.Nif,
             Date = datePicker.Date + timePicker.Time,
@@ -32,13 +34,19 @@ public partial class WorkerPage : ContentPage
         user.LastIsEntry = workLog.IsEntry;
         await Database.UpdateUserAsync(user);
 
-        Label label = new() { Text = workLog.Date.ToString("dd-MM-yyyy HH:mm"), HorizontalOptions = LayoutOptions.Center };
-
-        if (workLog.IsEntry) entry.Children.Add(label);
-        else exit.Children.Add(label);
-
-        await DisplayAlert("Éxito", "Fecha y hora registrado correctamente.", "OK");
+        AddLogToUI(workLog);
+        await DisplayAlert("Ã‰xito", "Fecha y hora registrado correctamente.", "OK");
         await Navigation.PopAsync();
+    }
+
+    private void AddLogToUI(WorkLog workLog)
+    {
+        var label = new Label
+        {
+            Text = workLog.Date.ToString("dd-MM-yyyy HH:mm"),
+            HorizontalOptions = LayoutOptions.Center
+        };
+        (workLog.IsEntry ? entry : exit).Children.Add(label);
     }
 
     private async void LoadWorkLogs()
@@ -76,13 +84,13 @@ public partial class WorkerPage : ContentPage
     {
         string newPassword =
                 await DisplayPromptAsync(
-                    GetString("ChangePassword"),
-                    GetString("EnterNewPassword"),
-                    GetString("Accept"), GetString("Cancel"),
-                    GetString("NewPassword"), 18, Keyboard.Default);
+                    "ChangePassword",
+                    "Enter New Password",
+                    "Accept", "Cancel",
+                    "New Password", 18, Keyboard.Default);
 
         if (!user.ChangePassword(newPassword)) return;
-        else await DisplayAlert(GetString("Success"), GetString("PasswordChangedSuccessfully"), "OK");
+        else await DisplayAlert("Success", "Password Changed Successfully", "OK");
 
         await Database.UpdateUserAsync(user);
     }

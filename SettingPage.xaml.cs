@@ -1,3 +1,5 @@
+﻿using WorkTimeLog.Services;
+
 namespace WorkTimeLog;
 
 public partial class SettingPage : ContentPage
@@ -5,58 +7,67 @@ public partial class SettingPage : ContentPage
     public SettingPage()
     {
         InitializeComponent();
-        if (Application.Current != null) isDarkMode.IsToggled = Application.Current.RequestedTheme == AppTheme.Dark;
 
-        // Establecer el idioma seleccionado actual
-        var currentCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-        switch (currentCulture)
+        // Cargar ajustes guardados
+        LoadSettings();
+    }
+
+    private void LoadSettings()
+    {
+        // Cargar tema oscuro
+        bool isDarkModeEnabled = Preferences.Get("IsDarkModeEnabled", Application.Current?.RequestedTheme == AppTheme.Dark);
+        isDarkMode.IsToggled = isDarkModeEnabled;
+
+        // Cargar idioma
+        string savedLanguage = Preferences.Get("AppLanguage", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+        PlaceholderLabel.Text = savedLanguage switch
         {
-            case "es":
-                languagePicker.SelectedIndex = 0;
-                break;
-            case "zh":
-                languagePicker.SelectedIndex = 1;
-                break;
-            default:
-                languagePicker.SelectedIndex = 2;
-                break;
-        }
+            "es" => "Español",
+            "zh" => "简体中文",
+            _ => "English"
+        };
+        ChangeLanguage(savedLanguage);
     }
 
     private void IsDarkModeToggled(object sender, ToggledEventArgs e)
     {
-        if (Application.Current != null) Application.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
+        if (Application.Current != null)
+        {
+            Application.Current.UserAppTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
+            Preferences.Set("IsDarkModeEnabled", e.Value);
+        }
     }
 
-    private void OnLanguageChanged(object sender, EventArgs e)
+    private void ChangeLanguage(string languageCode)
     {
-        var selectedLanguage = languagePicker.SelectedIndex;
+        CultureInfo culture = new(languageCode);
+
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        LocalizationService.Instance.SetCulture(culture);
+
+        Preferences.Set("AppLanguage", languageCode);
+
+    }
+
+    private void SelectLanguage(object sender, EventArgs e)
+    {
+        string selectedLanguage = (string)languagePicker.SelectedItem;
+
         switch (selectedLanguage)
         {
-            case 0:
-                SetCulture("es");
+            case "Español":
+                ChangeLanguage("es");
                 break;
-            case 1:
-                SetCulture("zh");
+            case "简体中文":
+                ChangeLanguage("zh");
                 break;
             default:
-                SetCulture("en");
+                ChangeLanguage("en");
                 break;
         }
-    }
 
-    private void SetCulture(string cultureCode)
-    {
-        var culture = new CultureInfo(cultureCode);
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = culture;
-
-        LocalizationService.LoadLocalization(cultureCode);
-
-        // Recargar la p�gina para aplicar el nuevo idioma
-        if (Application.Current?.Windows.Count > 0)
-        {
-            Application.Current.Windows[0].Page = new AppShell();
-        }
+        if (Application.Current?.Windows.Count > 0) Application.Current.Windows[0].Page = new AppShell();
     }
 }

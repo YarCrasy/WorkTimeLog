@@ -1,4 +1,6 @@
-﻿namespace WorkTimeLog
+﻿using WorkTimeLog.Services;
+
+namespace WorkTimeLog
 {
     public static class MauiProgram
     {
@@ -12,8 +14,8 @@
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-            // Registrar AppDbContext como un servicio singleton
             builder.Services.AddSingleton<AppDbContext>();
+            builder.Services.AddSingleton<LocalizationService>();
 
             return builder.Build();
         }

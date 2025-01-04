@@ -4,6 +4,14 @@
              x:Class="WorkTimeLog.AdminPage"
              Title="AdminPage">
     <VerticalStackLayout Spacing="10">
+        <Label 
+            Text="Empresa: "
+            x:Name="companyName"
+            HorizontalOptions="Center"/>
+        <Label
+            Text="NIF: "
+            HorizontalOptions="Center"/>
+
         <Button 
             Text="Crear Nuevo Usuario"
             Clicked="CreateUserButtonClicked"

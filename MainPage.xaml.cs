@@ -1,64 +1,45 @@
-﻿using static LocalizationService;
+﻿using WorkTimeLog.Resources.Localization;
+using System.Globalization;
 
 namespace WorkTimeLog
 {
     public partial class MainPage : ContentPage
     {
-
         public MainPage(AppDbContext db)
         {
             InitializeComponent();
-            Database = db; // Asignar la instancia a la propiedad estática
+            Database = db;
             LoadUsers();
         }
 
-        private async void LoadUsers()
-        {
-            List<User> usuarios = await Database.GetUsersAsync();
+        private async void LoadUsers() =>
+            (await Database.GetUsersAsync()).ForEach(u => UserPicker.Items.Add(u.NameSurname));
 
-            foreach (var usuario in usuarios)
-            {
-                UserPicker.Items.Add(usuario.NameSurname);
-            }
-        }
-
-        private void UserPickerSelection(object sender, EventArgs e)
-        {
+        private void UserPickerSelection(object sender, EventArgs e) =>
             PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1;
-        }
 
-        internal void AddUser(User user)
-        {
-            UserPicker.Items.Add(user.NameSurname);
-        }
-
-        internal void RemoveUser(User user)
-        {
-            UserPicker.Items.Remove(user.NameSurname);
-        }
+        internal void AddUser(User user) => UserPicker.Items.Add(user.NameSurname);
+        internal void RemoveUser(User user) => UserPicker.Items.Remove(user.NameSurname);
 
         private async void LoginButtonClicked(object sender, EventArgs e)
         {
-            string userName = (string)UserPicker.SelectedItem;
-            string inputPassword = password.Text;
-
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(inputPassword))
+            var userName = (string)UserPicker.SelectedItem;
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password.Text))
             {
-                await DisplayAlert("Error", GetString("LoginPrompt"), "OK");
+                await DisplayAlert("Error", "you must fill all the fields", "OK");
                 return;
             }
 
-            User? user = await Database.GetUserByNameAsync(userName);
-
-            if (user != null && user.Password == inputPassword)
+            var user = await Database.GetUserByNameAsync(userName);
+            if (user?.Password == password.Text)
             {
                 UserPicker.SelectedIndex = -1;
-                if (user.NameSurname != "Admin") await Navigation.PushAsync(new WorkerPage(user));
-                else await Navigation.PushAsync(new AdminPage(this, user));
+                await Navigation.PushAsync(user.IsAdmin() ? 
+                    new AdminPage(this, user) : new WorkerPage(user));
             }
             else
             {
-                await DisplayAlert("Error", GetString("LoginError"), "OK");
+                await DisplayAlert("Error", "User does not exist or password incorrect", "OK");
             }
             password.Text = string.Empty;
         }

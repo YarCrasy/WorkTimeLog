@@ -14,7 +14,14 @@ public partial class AdminPage : ContentPage
 
     private async void CreateUserButtonClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RegisterPage(main));
+        Company company = await Database.GetCompanyAsync();
+        if (company.IsEmpty())
+        {
+            await DisplayAlert("Error", "Company data is not set yet", "OK");
+            return;
+        }
+
+        await Navigation.PushAsync(new RegisterPage(main, company));
     }
 
     private async void ManageUsersButtonClicked(object sender, EventArgs e)

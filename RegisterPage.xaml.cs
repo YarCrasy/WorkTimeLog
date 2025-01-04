@@ -5,10 +5,13 @@ namespace WorkTimeLog;
 public partial class RegisterPage : ContentPage
 {
     readonly MainPage mainPage;
-    public RegisterPage(MainPage mainRef)
+    readonly Company company;
+    
+    public RegisterPage(MainPage mainRef, Company companyData)
     {
         InitializeComponent();
         mainPage = mainRef;
+        company = companyData;
     }
 
     private async void RegisterButtonClicked(object sender, EventArgs e)
@@ -18,34 +21,37 @@ public partial class RegisterPage : ContentPage
             Nif = nif.Text,
             NameSurname = userNameRegister.Text,
             Password = passwordRegister.Text,
-            LastIsEntry = false
+            LastIsEntry = false,
+            CompanyData = company
         };
-        string confirmPassword = confirmPasswordRegister.Text;
 
-        if (string.IsNullOrEmpty(newUser.Nif) ||
-            string.IsNullOrEmpty(newUser.NameSurname) ||
-            string.IsNullOrEmpty(newUser.Password))
+        if (await ValidateRegistration(newUser, confirmPasswordRegister.Text))
         {
-            await DisplayAlert("Error", "Faltan campos por rellenar", "OK");
-            return;
+            await Database.InsertUserAsync(newUser);
+            mainPage.AddUser(newUser);
+            await DisplayAlert("Success", "User Created correctly", "OK");
+            await Navigation.PopAsync();
         }
-        else if (await Database.UserExist(newUser))
-        {
-            await DisplayAlert("Error", "El nombre o nif del usuario ya exsiste", "OK");
-            return;
-        }
-        else if (newUser.Password != confirmPassword)
-        {
-            await DisplayAlert("Error", "Las contraseñas son distintas", "OK");
-            return;
-        }
-
-        await Database.InsertUserAsync(newUser);
-
-        await DisplayAlert("Éxito", "Usuario registrado correctamente.", "OK");
-        mainPage.AddUser(newUser);
-        await Navigation.PopAsync();
     }
 
-
+    private async Task<bool> ValidateRegistration(User user, string confirmPassword)
+    {
+        if (string.IsNullOrEmpty(user.Nif) || string.IsNullOrEmpty(user.NameSurname) || 
+            string.IsNullOrEmpty(user.Password))
+        {
+            await DisplayAlert("Error", "you must fill all the fields", "OK");
+            return false;
+        }
+        if (await Database.UserExist(user))
+        {
+            await DisplayAlert("Error", "User already exists", "OK");
+            return false;
+        }
+        if (user.Password != confirmPassword)
+        {
+            await DisplayAlert("Error", "Password are not the same", "OK");
+            return false;
+        }
+        return true;
+    }
 }

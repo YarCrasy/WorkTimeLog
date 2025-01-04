@@ -69,26 +69,25 @@ public partial class UsersListPage : ContentPage
     {
         Button deleteButton = (Button)sender;
         Border userLayout = (Border)deleteButton.Parent.Parent;
-        if (!string.IsNullOrEmpty(userLayout.ClassId))
-        {
-            if (Database.GetUserByNifAsync(userLayout.ClassId) != null)
-            {
-                User u = await Database.GetUserByNifAsync(userLayout.ClassId);
-                if (u != null) await Database.DropUserAsync(u);
+        string userId = userLayout.ClassId;
 
-                UserList.Children.Remove(userLayout);
-                main.RemoveUser(u);
-
-                await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", "OK");
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo encontrar el usuario en la base de datos.", "OK");
-            }
-        }
-        else
+        if (string.IsNullOrEmpty(userId))
         {
-            await DisplayAlert("Error", "ID nulo o vacio.", "OK");
+            await DisplayAlert("Error", "ID nulo o vac�o.", "OK");
+            return;
         }
+
+        User? user = await Database.GetUserByNifAsync(userId);
+        if (user == null)
+        {
+            await DisplayAlert("Error", "No se pudo encontrar el usuario en la base de datos.", "OK");
+            return;
+        }
+
+        await Database.DropUserAsync(user);
+        UserList.Children.Remove(userLayout);
+        main.RemoveUser(user);
+
+        await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", "OK");
     }
 }

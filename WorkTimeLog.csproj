@@ -58,26 +58,6 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <AndroidResource Remove="Resources\en\**" />
-	  <AndroidResource Remove="Resources\es\**" />
-	  <AndroidResource Remove="Resources\zh\**" />
-	  <Compile Remove="Resources\en\**" />
-	  <Compile Remove="Resources\es\**" />
-	  <Compile Remove="Resources\zh\**" />
-	  <EmbeddedResource Remove="Resources\en\**" />
-	  <EmbeddedResource Remove="Resources\es\**" />
-	  <EmbeddedResource Remove="Resources\zh\**" />
-	  <MauiCss Remove="Resources\en\**" />
-	  <MauiCss Remove="Resources\es\**" />
-	  <MauiCss Remove="Resources\zh\**" />
-	  <MauiXaml Remove="Resources\en\**" />
-	  <MauiXaml Remove="Resources\es\**" />
-	  <MauiXaml Remove="Resources\zh\**" />
-	  <None Remove="Resources\en\**" />
-	  <None Remove="Resources\es\**" />
-	  <None Remove="Resources\zh\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />

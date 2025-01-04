@@ -9,12 +9,24 @@
             <Switch x:Name="isDarkMode" IsToggled="False" Toggled="IsDarkModeToggled"/>
         </HorizontalStackLayout>
         <Label Text="Seleccionar idioma" />
-        <Picker x:Name="languagePicker" SelectedIndexChanged="OnLanguageChanged">
-            <Picker.Items>
-                <x:String>Español</x:String>
-                <x:String>Chino</x:String>
-                <x:String>Inglés</x:String>
-            </Picker.Items>
-        </Picker>
+
+        <Grid>
+            <Label 
+                x:Name="PlaceholderLabel"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                IsVisible="True" 
+                Margin="10,0,0,0"/>
+
+            <Picker x:Name="languagePicker" SelectedIndexChanged="SelectLanguage">
+                <Picker.Items>
+                    <x:String>English</x:String>
+                    <x:String>Español</x:String>
+                    <x:String>简体中文</x:String>
+                </Picker.Items>
+            </Picker>
+        </Grid>
+        
+
     </VerticalStackLayout>
 </ContentPage>

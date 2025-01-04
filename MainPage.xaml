@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WorkTimeLog.Resources.Localization"
              x:Class="WorkTimeLog.MainPage"
              Title="">
 
@@ -10,15 +11,15 @@
             Spacing="25">
 
             <Label
-                Text="Work Log"
+                x:Name="AppTitle"
+                Text="{x:Static local:LanguageResource.AppTitle}"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
-            
-            <Grid>
 
+            <Grid>
                 <Label 
                     x:Name="PlaceholderLabel"
-                    Text="Select User"
+                    Text="{x:Static local:LanguageResource.SelectUser}"
                     TextColor="Gray"
                     VerticalOptions="Center"
                     HorizontalOptions="Start"
@@ -33,8 +34,8 @@
                 </Picker>
             </Grid>
 
-            <Entry Placeholder="Password" IsPassword="True" x:Name="password" x:DataType="x:Byte"/>
-            <Button Text="Login" Clicked="LoginButtonClicked" />
+            <Entry Placeholder="{x:Static local:LanguageResource.Password}" IsPassword="True" x:Name="password" x:DataType="x:Byte"/>
+            <Button x:Name="LoginButton" Text="{x:Static local:LanguageResource.Login}" Clicked="LoginButtonClicked" />
 
         </VerticalStackLayout>
     </ScrollView>

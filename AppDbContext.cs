@@ -4,16 +4,13 @@ namespace WorkTimeLog
 {
     public class AppDbContext
     {
-        public static AppDbContext Database;
+        public static AppDbContext Database = new();
 
         private readonly SQLiteAsyncConnection _database;
 
         public AppDbContext()
         {
-            if (Database != null)
-            {
-                Database = this;
-            }
+            Database = this;
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "worktimelog.db");
 
             // Verificar si la base de datos ya existe
@@ -25,15 +22,16 @@ namespace WorkTimeLog
                 Nif = "Admin",
                 NameSurname = "Admin",
                 Password = "123",
-                LastIsEntry = false
+                LastIsEntry = false,
+                CompanyData = new()
             };
 
             if (!dbExists)
             {
                 // Crear las tablas si la base de datos no existe
-                _database.CreateTableAsync<User>().Wait();
+                 _database.CreateTableAsync<User>();
                 InsertUserAsync(admin);
-                _database.CreateTableAsync<WorkLog>().Wait();
+                _database.CreateTableAsync<WorkLog>();
             }
             else if(!UserExist(admin).Result)
             {
@@ -57,9 +55,9 @@ namespace WorkTimeLog
             return _database.DeleteAsync(user);
         }
 
-        public async Task<User> GetUserByNifAsync(string nif)
+        public Task<User> GetUserByNifAsync(string nif)
         {
-            return await _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
+            return  _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
         }
 
         public Task<User> GetUserByNameAsync(string name)
@@ -67,9 +65,15 @@ namespace WorkTimeLog
             return _database.Table<User>().Where(u => u.NameSurname == name).FirstOrDefaultAsync();
         }
 
+        public async Task<Company> GetCompanyAsync()
+        {
+            User admin = await GetUserByNifAsync("Admin");
+            return admin.CompanyData;
+        }
+
         public Task<bool> UserExist(User user)
         {
-            return _database.Table<User>().Where(u => u.Nif == user.Nif || u.NameSurname == user.NameSurname).CountAsync().ContinueWith(t => t.Result > 0);
+            return  _database.Table<User>().Where(u => u.Nif == user.Nif || u.NameSurname == user.NameSurname).CountAsync().ContinueWith(t => t.Result > 0);
         }
 
         public Task<int> InsertWorkLogAsync(WorkLog workLog)
