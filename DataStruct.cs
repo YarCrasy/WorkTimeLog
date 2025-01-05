@@ -37,10 +37,10 @@ namespace WorkTimeLog
 
     public struct Company
     {
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string NIF { get; set; }
+        public string NIF;
+        public string Name;
+        public string Address;
+        public string Phone;
 
         public readonly bool IsEmpty()
         {

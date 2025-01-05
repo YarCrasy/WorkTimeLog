@@ -77,12 +77,6 @@ namespace WorkTimeLog
             return _database.Table<User>().Where(u => u.NameSurname == name).FirstOrDefaultAsync();
         }
 
-        //public async Task<Company> GetCompanyAsync()
-        //{
-        //    User admin = await GetUserByNifAsync("Admin");
-        //    return admin.CompanyData;
-        //}
-
         public Task<bool> UserExist(User user)
         {
             bool result = false;
@@ -109,5 +103,7 @@ namespace WorkTimeLog
         {
             return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
         }
+
+
     }
 }

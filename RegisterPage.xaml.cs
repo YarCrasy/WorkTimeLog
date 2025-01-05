@@ -5,13 +5,11 @@ namespace WorkTimeLog;
 public partial class RegisterPage : ContentPage
 {
     readonly MainPage mainPage;
-    readonly Company company;
     
-    public RegisterPage(MainPage mainRef, Company companyData)
+    public RegisterPage(MainPage mainRef)
     {
         InitializeComponent();
         mainPage = mainRef;
-        company = companyData;
     }
 
     private async void RegisterButtonClicked(object sender, EventArgs e)
