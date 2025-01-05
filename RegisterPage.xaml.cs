@@ -22,7 +22,6 @@ public partial class RegisterPage : ContentPage
             NameSurname = userNameRegister.Text,
             Password = passwordRegister.Text,
             LastIsEntry = false,
-            CompanyData = company
         };
 
         if (await ValidateRegistration(newUser, confirmPasswordRegister.Text))

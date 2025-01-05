@@ -12,14 +12,29 @@ namespace WorkTimeLog
             LoadUsers();
         }
 
-        private async void LoadUsers() =>
-            (await Database.GetUsersAsync()).ForEach(u => UserPicker.Items.Add(u.NameSurname));
+        private async void LoadUsers()
+        {
+            User[] userList = [.. (await Database.GetUsersAsync())];
+            for (int i = 0; i < userList.Length; i++)
+            {
+                UserPicker.Items.Add(userList[i].NameSurname);
+            }
+        }
 
-        private void UserPickerSelection(object sender, EventArgs e) =>
+        private void UserPickerSelection(object sender, EventArgs e)
+        {
             PlaceholderLabel.IsVisible = UserPicker.SelectedIndex == -1;
+        }
 
-        internal void AddUser(User user) => UserPicker.Items.Add(user.NameSurname);
-        internal void RemoveUser(User user) => UserPicker.Items.Remove(user.NameSurname);
+        internal void AddUser(User user) 
+        {
+            UserPicker.Items.Add(user.NameSurname);
+        }
+
+        internal void RemoveUser(User user)
+        {
+            UserPicker.Items.Remove(user.NameSurname);
+        }
 
         private async void LoginButtonClicked(object sender, EventArgs e)
         {

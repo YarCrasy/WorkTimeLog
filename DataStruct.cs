@@ -9,7 +9,6 @@ namespace WorkTimeLog
         public string NameSurname { get; set; } = "";
         public string Password { get; set; } = "";
         public bool LastIsEntry { get; set; }
-        public Company CompanyData { get; set; }
 
         public bool IsAdmin()
         {

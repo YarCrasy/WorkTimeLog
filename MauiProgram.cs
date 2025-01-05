@@ -7,15 +7,15 @@ namespace WorkTimeLog
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+            builder.Services.AddSingleton<AppDbContext>();
+            builder.Services.AddSingleton<LocalizationService>();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
-            builder.Services.AddSingleton<AppDbContext>();
-            builder.Services.AddSingleton<LocalizationService>();
 
             return builder.Build();
         }
