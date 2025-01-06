@@ -1,4 +1,5 @@
 using SQLite;
+using System.Text.Json;
 
 namespace WorkTimeLog
 {
@@ -16,17 +17,22 @@ namespace WorkTimeLog
             LastIsEntry = false
         };
 
+        internal static Company companyData = new();
+        private readonly string companyJsonPath;
+
         public AppDbContext()
         {
             Database = this;
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "worktimelog.db");
+            string localPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string dbPath = Path.Combine(localPath, "worktimelog.db");
+            companyJsonPath = Path.Combine(localPath, "company.json");
 
-
-            bool dbExists = File.Exists(dbPath);
             _database = new SQLiteAsyncConnection(dbPath);
-            dbExists = !IsDatabaseCorrupted();
+            bool dbExists = _database != null && !IsDatabaseCorrupted();
 
             if (!dbExists) InitDatabase();
+
+            InitCompany();
         }
 
         private bool IsDatabaseCorrupted()
@@ -49,6 +55,28 @@ namespace WorkTimeLog
             _database.CreateTableAsync<User>().Wait();
             InsertUserAsync(admin).Wait();
             _database.CreateTableAsync<WorkLog>().Wait();
+        }
+
+        //load company data if exists, or create new company
+        private void InitCompany()
+        {
+            if (File.Exists(companyJsonPath))
+            {
+                LoadCompanyData();
+            }
+            else SaveCompanyData();
+        }
+
+        private void LoadCompanyData()
+        {
+            string json = File.ReadAllText(companyJsonPath);
+            companyData = JsonSerializer.Deserialize<Company>(json);
+        }
+
+        public void SaveCompanyData()
+        {
+            string json = JsonSerializer.Serialize(companyData);
+            File.WriteAllText(companyJsonPath, json);
         }
 
         public Task<List<User>> GetUsersAsync()
@@ -80,7 +108,7 @@ namespace WorkTimeLog
         public Task<bool> UserExist(User user)
         {
             bool result = false;
-            if(GetUserByNifAsync(user.Nif) != null) result = true;
+            if (GetUserByNifAsync(user.Nif) != null) result = true;
             return Task.FromResult(result);
         }
 
@@ -103,7 +131,5 @@ namespace WorkTimeLog
         {
             return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
         }
-
-
     }
 }

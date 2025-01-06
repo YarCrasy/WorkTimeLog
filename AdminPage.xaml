@@ -10,8 +10,15 @@
             HorizontalOptions="Center"/>
         <Label
             Text="NIF: "
+            x:Name="companyNif"
             HorizontalOptions="Center"/>
 
+        <Button
+            Text="Datos de la Empresa"
+            Clicked="UpdateCompanyDataClicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            WidthRequest="600"/>
         <Button 
             Text="Crear Nuevo Usuario"
             Clicked="CreateUserButtonClicked"

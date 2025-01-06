@@ -16,7 +16,7 @@ public partial class RegisterPage : ContentPage
     {
         User newUser = new()
         {
-            Nif = nif.Text,
+            Nif = nifInput.Text,
             NameSurname = userNameRegister.Text,
             Password = passwordRegister.Text,
             LastIsEntry = false,

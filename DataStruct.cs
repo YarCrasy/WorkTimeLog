@@ -35,16 +35,14 @@ namespace WorkTimeLog
         public bool IsEntry { get; set; }
     }
 
-    public struct Company
+    internal struct Company
     {
-        public string NIF;
-        public string Name;
-        public string Address;
-        public string Phone;
+        public string nif;
+        public string name;
 
         public readonly bool IsEmpty()
         {
-            return string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Phone) || string.IsNullOrEmpty(NIF);
+            return string.IsNullOrEmpty(name) || string.IsNullOrEmpty(nif);
         }
     }
 }

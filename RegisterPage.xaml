@@ -9,7 +9,7 @@
             SemanticProperties.HeadingLevel="Level1" />
         <Entry 
             Placeholder="NIF" 
-            x:Name="nif" 
+            x:Name="nifInput" 
             Margin="10,10,10,10"/>
         <Entry 
             Placeholder="Name" 
