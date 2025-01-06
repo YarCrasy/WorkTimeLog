@@ -65,6 +65,13 @@
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Compile Update="UpdateEmployerPage.xaml.cs">
+	    <DependentUpon>UpdateEmployerPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 	<ItemGroup>
 		<MauiXaml Update="AdminPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -72,7 +79,7 @@
 		<MauiXaml Update="SettingPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="UpdateCompanyPage.xaml">
+		<MauiXaml Update="UpdateEmployerPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="UsersListPage.xaml">
