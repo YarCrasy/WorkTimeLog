@@ -1,11 +1,12 @@
 using SQLite;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WorkTimeLog
 {
     public class AppDbContext
     {
-        public static AppDbContext Database = new();
+        internal static AppDbContext Database = new();
 
         private readonly SQLiteAsyncConnection _database;
 
@@ -18,21 +19,20 @@ namespace WorkTimeLog
         };
 
         internal static Company companyData = new();
-        private readonly string companyJsonPath;
+        private readonly string employerDataPath;
 
         public AppDbContext()
         {
             Database = this;
             string localPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string dbPath = Path.Combine(localPath, "worktimelog.db");
-            companyJsonPath = Path.Combine(localPath, "company.json");
+            employerDataPath = Path.Combine(localPath, "employerData.json");
 
             _database = new SQLiteAsyncConnection(dbPath);
-            bool dbExists = _database != null && !IsDatabaseCorrupted();
 
-            if (!dbExists) InitDatabase();
+            if (IsDatabaseCorrupted()) InitDatabase();
 
-            InitCompany();
+            InitEmployerData();
         }
 
         private bool IsDatabaseCorrupted()
@@ -45,7 +45,7 @@ namespace WorkTimeLog
             }
             catch (Exception)
             {
-                return true;
+                result = true;
             }
             return result;
         }
@@ -58,9 +58,9 @@ namespace WorkTimeLog
         }
 
         //load company data if exists, or create new company
-        private void InitCompany()
+        private void InitEmployerData()
         {
-            if (File.Exists(companyJsonPath))
+            if (File.Exists(employerDataPath))
             {
                 LoadCompanyData();
             }
@@ -69,14 +69,17 @@ namespace WorkTimeLog
 
         private void LoadCompanyData()
         {
-            string json = File.ReadAllText(companyJsonPath);
+            string json = File.ReadAllText(employerDataPath);
+            Debug.WriteLine(employerDataPath);
+            Debug.WriteLine(json);
             companyData = JsonSerializer.Deserialize<Company>(json);
         }
 
         public void SaveCompanyData()
         {
             string json = JsonSerializer.Serialize(companyData);
-            File.WriteAllText(companyJsonPath, json);
+            Debug.WriteLine(json);
+            File.WriteAllText(employerDataPath, json);
         }
 
         public Task<List<User>> GetUsersAsync()
@@ -108,7 +111,7 @@ namespace WorkTimeLog
         public Task<bool> UserExist(User user)
         {
             bool result = false;
-            if (GetUserByNifAsync(user.Nif) != null) result = true;
+            if (GetUserByNifAsync(user.Nif).Result != null) result = true;
             return Task.FromResult(result);
         }
 

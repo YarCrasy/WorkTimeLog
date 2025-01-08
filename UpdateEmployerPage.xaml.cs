@@ -20,8 +20,9 @@ public partial class UpdateEmployerPage : ContentPage
             nif = nifInput.Text,
             name = employerNameInput.Text
         };
+        Database.SaveCompanyData();
 
-        await DisplayAlert("Success", "Company data updated correctly", "OK");
-
+        await DisplayAlert("Comfirmation", "Employer data updated correctly", "OK");
+        await Navigation.PopAsync();
     }
 }

@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace WorkTimeLog;
 
@@ -39,6 +39,11 @@ public partial class RegisterPage : ContentPage
             await DisplayAlert("Error", "you must fill all the fields", "OK");
             return false;
         }
+        if(!IsValidNif(user.Nif))
+        {
+            await DisplayAlert("Error", "Nif is not valid", "OK");
+            return false;
+        }
         if (await Database.UserExist(user))
         {
             await DisplayAlert("Error", "User already exists", "OK");
@@ -50,5 +55,15 @@ public partial class RegisterPage : ContentPage
             return false;
         }
         return true;
+    }
+    private bool IsValidNif(string nif)
+    {
+        //NIF validation
+        Regex nifRegex = new(@"^\d{8}[A-Za-z]$");
+
+        //NIE validation
+        Regex nieRegex = new(@"^[XYZ]\d{7}[A-Za-z]$");
+
+        return nifRegex.IsMatch(nif) || nieRegex.IsMatch(nif);
     }
 }

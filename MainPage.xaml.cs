@@ -1,7 +1,4 @@
-﻿using WorkTimeLog.Resources.Localization;
-using System.Globalization;
-
-namespace WorkTimeLog
+﻿namespace WorkTimeLog
 {
     public partial class MainPage : ContentPage
     {
