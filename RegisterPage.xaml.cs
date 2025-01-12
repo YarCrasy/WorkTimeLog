@@ -62,7 +62,7 @@ public partial class RegisterPage : ContentPage
         Regex nifRegex = new(@"^\d{8}[A-Za-z]$");
 
         //NIE validation
-        Regex nieRegex = new(@"^[XYZ]\d{7}[A-Za-z]$");
+        Regex nieRegex = new(@"^[XYZxyz]\d{7}[A-Za-z]$");
 
         return nifRegex.IsMatch(nif) || nieRegex.IsMatch(nif);
     }

@@ -2,40 +2,73 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkTimeLog.AdminPage"
-             Title="AdminPage">
-    <VerticalStackLayout Spacing="10">
-        <Label 
-            Text="Empresa: "
-            x:Name="companyName"
-            HorizontalOptions="Center"/>
-        <Label
-            Text="NIF: "
-            x:Name="companyNif"
-            HorizontalOptions="Center"/>
+             Title="">
+    <VerticalStackLayout>
 
-        <Button
-            Text="Datos de la Empresa"
-            Clicked="UpdateCompanyDataClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            WidthRequest="600"/>
-        <Button 
-            Text="Crear Nuevo Usuario"
-            Clicked="CreateUserButtonClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            WidthRequest="600"/>
-        <Button 
-            Text="Administrar Usuarios"
-            Clicked="ManageUsersButtonClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            WidthRequest="600"/>
-        <Button 
-            Text="Cambiar Contraseña"
-            Clicked="ChangePasswordButtonClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            WidthRequest="600"/>
+        <Label
+            Text="AdminPage"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1"/>
+        <Grid Margin="30, 20, 30, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label 
+                Text="Empleador: "
+                Grid.Column="0"
+                Grid.Row="0"/>
+
+            <Label
+                x:Name="companyName"
+                Grid.Column="0"
+                Grid.Row="1"/>
+
+            <Label
+                Text="NIF: "
+                x:Name="companyNif"
+                Grid.Column="0"
+                Grid.Row="2"/>
+
+        </Grid>
+
+        <Grid RowSpacing="10" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button
+                Text="Datos de la Empresa"
+                Clicked="UpdateEmployerDataClicked"
+                Grid.Row="0"
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand"/>
+            <Button 
+                Text="Crear Nuevo Usuario"
+                Clicked="CreateUserButtonClicked"
+                Grid.Row="1"
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand"/>
+            <Button 
+                Text="Administrar Usuarios"
+                Clicked="ManageUsersButtonClicked"
+                Grid.Row="2"
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand"/>
+            <Button 
+                Text="Cambiar Contraseña"
+                Clicked="ChangePasswordButtonClicked"
+                Grid.Row="3"
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand"/>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

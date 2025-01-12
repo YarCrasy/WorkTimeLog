@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WorkTimeLog.WorkerPage"
-             Title="WorkerPage">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             x:Class="WorkTimeLog.WorkerPage">
+    <VerticalStackLayout>
+        <Label
+            Text="Worker Page"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1" />
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
+            <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Text="Worker: " x:Name="workerName" 
-                       Grid.Column="0" Grid.Row="0"/>
-                <Label Text="NIF: " x:Name="workerNif" 
-                       Grid.Column="0" Grid.Row="1"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Worker: " x:Name="workerName" 
+                   Grid.Column="0" Grid.Row="0"/>
+                    <Label Text="NIF: " x:Name="workerNif" 
+                   Grid.Column="0" Grid.Row="1"/>
 
-                <Label Text="Company: " x:Name="companyName" 
-                       Grid.Column="1" Grid.Row="0"/>
-                <Label Text="NIF: " x:Name="companyNif" 
-                       Grid.Column="1" Grid.Row="1"/>
+                    <Label Text="Company: " x:Name="companyName" 
+                   Grid.Column="1" Grid.Row="0"/>
+                    <Label Text="NIF: " x:Name="companyNif" 
+                   Grid.Column="1" Grid.Row="1"/>
 
-                <Button Text="Ajustes"
-                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-            </Grid>
+                    <Button Text="Ajustes"
+                    Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
+                </Grid>
 
-            <HorizontalStackLayout Spacing="10" Margin="0, 10, 0, 0">
-                <HorizontalStackLayout>
-                    <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
-                    <TimePicker x:Name="timePicker" Format="HH:mm"/>
+                <HorizontalStackLayout Spacing="10" Margin="0, 10, 0, 0">
+                    <HorizontalStackLayout>
+                        <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
+                        <TimePicker x:Name="timePicker" Format="HH:mm"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                        <Label VerticalOptions="Center">Entry</Label>
+                        <Switch x:Name="isEntry" WidthRequest="100"/>
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
-                
-                <HorizontalStackLayout>
-                    <Label VerticalOptions="Center">Entry</Label>
-                    <Switch x:Name="isEntry" WidthRequest="100"/>
-                </HorizontalStackLayout>
-            </HorizontalStackLayout>
-            
-            <Button Text="Save" Clicked="LogTimeClicked"/>
-            
-        </VerticalStackLayout>
 
-        <ScrollView Grid.Row="1" Margin="10">
-            <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" ColumnSpacing="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border BackgroundColor="Green" Grid.Column="0" StrokeShape="RoundRectangle 10">
-                    <VerticalStackLayout Grid.Column="0" 
-                          Spacing="10" 
-                          x:Name="entry" 
-                          HorizontalOptions="FillAndExpand"/>
-                </Border>
+                <Button Text="Save" Clicked="LogTimeClicked"/>
 
-                <Border BackgroundColor="Red" Grid.Column="1" StrokeShape="RoundRectangle 10">
-                    <VerticalStackLayout Grid.Column="1" 
-                          Spacing="10" 
-                          x:Name="exit" 
-                          HorizontalOptions="FillAndExpand"/>
-                </Border>
-            </Grid>
-        </ScrollView>
-    </Grid>
+            </VerticalStackLayout>
+
+            <ScrollView Grid.Row="1" Margin="10">
+                <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BackgroundColor="Green" Grid.Column="0" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Grid.Column="0" 
+                      Spacing="10" 
+                      x:Name="entry" 
+                      HorizontalOptions="FillAndExpand"/>
+                    </Border>
+
+                    <Border BackgroundColor="Red" Grid.Column="1" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Grid.Column="1" 
+                      Spacing="10" 
+                      x:Name="exit" 
+                      HorizontalOptions="FillAndExpand"/>
+                    </Border>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>

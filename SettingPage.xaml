@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WorkTimeLog.SettingPage"
-             Title="Setting">
+             Title="">
     <VerticalStackLayout Margin="10" Spacing="10">
+        <Label
+            Text="Settings"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1" />
+        
         <HorizontalStackLayout Spacing="10">
             <Label Text="Dark Mode" VerticalOptions="Center"/>
             <Switch x:Name="isDarkMode" IsToggled="False" Toggled="IsDarkModeToggled"/>
@@ -11,12 +16,6 @@
         <Label Text="Seleccionar idioma" />
 
         <Grid>
-            <Label 
-                x:Name="PlaceholderLabel"
-                VerticalOptions="Center"
-                HorizontalOptions="Start"
-                IsVisible="True" 
-                Margin="10,0,0,0"/>
 
             <Picker x:Name="languagePicker" SelectedIndexChanged="SelectLanguage">
                 <Picker.Items>
@@ -25,6 +24,13 @@
                     <x:String>简体中文</x:String>
                 </Picker.Items>
             </Picker>
+            
+            <Label 
+                x:Name="PlaceholderLabel"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                IsVisible="True" 
+                Margin="10,0,0,0"/>
         </Grid>
         
 

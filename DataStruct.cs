@@ -35,12 +35,12 @@ namespace WorkTimeLog
         public bool IsEntry { get; set; }
     }
 
-    internal struct Company
+    internal class Company
     {
-        public string nif;
-        public string name;
+        public string nif { get; set; } = "";
+        public string name { get; set; } = "";
 
-        public readonly bool IsEmpty()
+        public bool IsEmpty()
         {
             return string.IsNullOrEmpty(name) || string.IsNullOrEmpty(nif);
         }

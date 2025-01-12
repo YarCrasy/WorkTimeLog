@@ -60,25 +60,26 @@ namespace WorkTimeLog
         //load company data if exists, or create new company
         private void InitEmployerData()
         {
+            Debug.WriteLine("INITIALIZING EMPLOYER " + employerDataPath);
             if (File.Exists(employerDataPath))
             {
-                LoadCompanyData();
+                LoadEmployerData();
             }
-            else SaveCompanyData();
+            else SaveEmployerData();
         }
 
-        private void LoadCompanyData()
+        private void LoadEmployerData()
         {
             string json = File.ReadAllText(employerDataPath);
-            Debug.WriteLine(employerDataPath);
-            Debug.WriteLine(json);
-            companyData = JsonSerializer.Deserialize<Company>(json);
+            Company? aux = JsonSerializer.Deserialize<Company>(json);
+            companyData = aux ?? companyData;
         }
 
-        public void SaveCompanyData()
+        public void SaveEmployerData()
         {
+            Debug.WriteLine("SAVING EMPLOYER " + companyData.name + " " + companyData.nif);
             string json = JsonSerializer.Serialize(companyData);
-            Debug.WriteLine(json);
+            Debug.WriteLine("SAVED DATA " + json);
             File.WriteAllText(employerDataPath, json);
         }
 

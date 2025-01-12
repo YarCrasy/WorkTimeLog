@@ -2,49 +2,48 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:WorkTimeLog.Resources.Localization"
-             x:Class="WorkTimeLog.MainPage">
+             x:Class="WorkTimeLog.MainPage"
+             Title="">
+    
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <Label
+        x:Name="AppTitle"
+        Text="{x:Static local:LanguageResource.AppTitle}"
+        Style="{StaticResource Headline}"
+        SemanticProperties.HeadingLevel="Level1" />
 
-            <Label
-                x:Name="AppTitle"
-                Text="{x:Static local:LanguageResource.AppTitle}"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+        <Grid>
+            <Picker 
+            x:Name="UserPicker"
+            SelectedIndexChanged="UserPickerSelection">
+                <Picker.Items>
+                </Picker.Items>
+            </Picker>
+            <Label 
+            x:Name="PlaceholderLabel"
+            Text="{x:Static local:LanguageResource.SelectUser}"
+            TextColor="Grey"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            IsVisible="True" 
+            Margin="10,0,0,0"/>
 
-            <Grid>
-                <Label 
-                    x:Name="PlaceholderLabel"
-                    Text="{x:Static local:LanguageResource.SelectUser}"
-                    TextColor="Gray"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start"
-                    IsVisible="True" 
-                    Margin="10,0,0,0"/>
+        </Grid>
 
-                <Picker 
-                    x:Name="UserPicker"
-                    SelectedIndexChanged="UserPickerSelection">
-                    <Picker.Items>
-                    </Picker.Items>
-                </Picker>
-            </Grid>
+        <Entry 
+        Placeholder="{x:Static local:LanguageResource.Password}" 
+        IsPassword="True" 
+        x:Name="password" 
+        x:DataType="x:Byte"/>
 
-            <Entry 
-                Placeholder="{x:Static local:LanguageResource.Password}" 
-                IsPassword="True" 
-                x:Name="password" 
-                x:DataType="x:Byte"/>
+        <Button 
+        x:Name="LoginButton" 
+        Text="{x:Static local:LanguageResource.Login}"
+        Clicked="LoginButtonClicked" />
 
-            <Button 
-                x:Name="LoginButton" 
-                Text="{x:Static local:LanguageResource.Login}"
-                Clicked="LoginButtonClicked" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 
 </ContentPage>

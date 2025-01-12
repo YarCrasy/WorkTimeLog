@@ -2,25 +2,21 @@ namespace WorkTimeLog;
 
 public partial class UpdateEmployerPage : ContentPage
 {
-	public UpdateEmployerPage()
+    AdminPage adminPage;
+
+    public UpdateEmployerPage(AdminPage a)
 	{
 		InitializeComponent();
-	}
-
-    private async Task<bool> ValidateRegistration()
-    {
-        await DisplayPromptAsync("Comfirmation", "Company data updated correctly", "OK");
-        return true;
+        adminPage = a;
     }
 
     private async void UpdateButtonClicked(object sender, EventArgs e)
     {
-        companyData = new Company
-        {
-            nif = nifInput.Text,
-            name = employerNameInput.Text
-        };
-        Database.SaveCompanyData();
+        companyData.nif = nifInput.Text;
+        companyData.name = employerNameInput.Text;
+
+        Database.SaveEmployerData();
+        adminPage.DisplayCompanyData();
 
         await DisplayAlert("Comfirmation", "Employer data updated correctly", "OK");
         await Navigation.PopAsync();

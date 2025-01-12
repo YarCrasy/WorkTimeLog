@@ -14,16 +14,17 @@ public partial class AdminPage : ContentPage
         DisplayCompanyData();
     }
 
-    private void DisplayCompanyData()
+    public void DisplayCompanyData()
     {
-        companyName.Text = "Empleador: " + companyData.name;
+        companyName.Text = companyData.name;
         companyNif.Text = "Nif: " + companyData.nif;
     }
 
-    private async void UpdateCompanyDataClicked(object sender, EventArgs e)
+    private async void UpdateEmployerDataClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new UpdateEmployerPage());
+        await Navigation.PushAsync(new UpdateEmployerPage(this));
     }
+
 
     private async void CreateUserButtonClicked(object sender, EventArgs e)
     {
