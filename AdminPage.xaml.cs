@@ -16,8 +16,8 @@ public partial class AdminPage : ContentPage
 
     public void DisplayCompanyData()
     {
-        companyName.Text = companyData.name;
-        companyNif.Text = "Nif: " + companyData.nif;
+        employerName.Text = Database.employerData.name;
+        employerNif.Text = Database.employerData.nif;
     }
 
     private async void UpdateEmployerDataClicked(object sender, EventArgs e)
@@ -28,7 +28,7 @@ public partial class AdminPage : ContentPage
 
     private async void CreateUserButtonClicked(object sender, EventArgs e)
     {
-        if (companyData.IsEmpty())
+        if (Database.employerData.IsEmpty())
         {
             await DisplayAlert("Error", "Company data is not set yet", "OK");
             return;

@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WorkTimeLog.Resources.Localization"
              x:Class="WorkTimeLog.AdminPage"
              Title="">
     <VerticalStackLayout>
 
         <Label
-            Text="AdminPage"
+            Text="{x:Static local:LanguageResource.AdminSettings}"
             Style="{StaticResource Headline}"
             SemanticProperties.HeadingLevel="Level1"/>
-        <Grid Margin="30, 20, 30, 20">
+        
+        <Grid Margin="30, 20, 30, 20" RowSpacing="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0.15*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label 
-                Text="Empleador: "
+                Text="{x:Static local:LanguageResource.EmployerName}"
                 Grid.Column="0"
                 Grid.Row="0"/>
 
             <Label
-                x:Name="companyName"
-                Grid.Column="0"
-                Grid.Row="1"/>
+                x:Name="employerName"
+                Grid.Column="1"
+                Grid.Row="0"/>
 
             <Label
-                Text="NIF: "
-                x:Name="companyNif"
+                Text="{x:Static local:LanguageResource.employerNif}"
                 Grid.Column="0"
-                Grid.Row="2"/>
+                Grid.Row="1"/>
+            
+            <Label
+                x:Name="employerNif"
+                Grid.Column="1"
+                Grid.Row="1"/>
 
         </Grid>
 
@@ -46,25 +50,25 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Button
-                Text="Datos de la Empresa"
+                Text="{x:Static local:LanguageResource.UpdateEmployerData}"
                 Clicked="UpdateEmployerDataClicked"
                 Grid.Row="0"
                 VerticalOptions="Center" 
                 HorizontalOptions="FillAndExpand"/>
             <Button 
-                Text="Crear Nuevo Usuario"
+                Text="{x:Static local:LanguageResource.CreateUser}"
                 Clicked="CreateUserButtonClicked"
                 Grid.Row="1"
                 VerticalOptions="Center" 
                 HorizontalOptions="FillAndExpand"/>
             <Button 
-                Text="Administrar Usuarios"
+                Text="{x:Static local:LanguageResource.ManageUsers}"
                 Clicked="ManageUsersButtonClicked"
                 Grid.Row="2"
                 VerticalOptions="Center" 
                 HorizontalOptions="FillAndExpand"/>
             <Button 
-                Text="Cambiar Contraseña"
+                Text="{x:Static local:LanguageResource.ChangePassword}"
                 Clicked="ChangePasswordButtonClicked"
                 Grid.Row="3"
                 VerticalOptions="Center" 

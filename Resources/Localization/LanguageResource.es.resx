@@ -117,16 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdminSettings" xml:space="preserve">
+    <value>Ajustes de Administrador</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>Registro Horario Laboral</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Crear Nuevo Usuario</value>
+  </data>
+  <data name="EmployerName" xml:space="preserve">
+    <value>Empleador:</value>
+  </data>
+  <data name="employerNif" xml:space="preserve">
+    <value>NIF Empleador:</value>
+  </data>
+  <data name="WorkerNif" xml:space="preserve">
+    <value>NIF: </value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Entrar</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Gestionar Usuarios</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
   </data>
   <data name="SelectUser" xml:space="preserve">
     <value>Elige el Usuario</value>
+  </data>
+  <data name="UpdateEmployerData" xml:space="preserve">
+    <value>Actualizar Datos del Empleador</value>
+  </data>
+  <data name="WorkerLog" xml:space="preserve">
+    <value>Registro del Trabajador</value>
+  </data>
+  <data name="WorkerName" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="IsEntry" xml:space="preserve">
+    <value>Es entrada</value>
+  </data>
+  <data name="UpdateWorkerData" xml:space="preserve">
+    <value>Actualizar datos</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
   </data>
 </root>

@@ -1,82 +1,88 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WorkTimeLog.Resources.Localization"
              x:Class="WorkTimeLog.WorkerPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="20, 0, 20, 20" Spacing="10">
         <Label
-            Text="Worker Page"
+            Text="{x:Static local:LanguageResource.WorkerLog}"
             Style="{StaticResource Headline}"
             SemanticProperties.HeadingLevel="Level1" />
+
         
-        <Grid>
+        <Grid HorizontalOptions="StartAndExpand" ColumnSpacing="15" RowSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
+            <Label 
+                 Text="{x:Static local:LanguageResource.WorkerName}" 
+                 Grid.Column="0" Grid.Row="0"/>
 
-            <VerticalStackLayout Grid.Row="0" Margin="10" Spacing="10">
+            <Label 
+                 x:Name="workerName" 
+                 Grid.Column="1" Grid.Row="0"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Text="Worker: " x:Name="workerName" 
-                   Grid.Column="0" Grid.Row="0"/>
-                    <Label Text="NIF: " x:Name="workerNif" 
-                   Grid.Column="0" Grid.Row="1"/>
+            <Label 
+                 Text="{x:Static local:LanguageResource.WorkerNif}" 
+                 Grid.Column="0" Grid.Row="1"/>
 
-                    <Label Text="Company: " x:Name="companyName" 
-                   Grid.Column="1" Grid.Row="0"/>
-                    <Label Text="NIF: " x:Name="companyNif" 
-                   Grid.Column="1" Grid.Row="1"/>
+            <Label 
+                 x:Name="workerNif" 
+                 Grid.Column="1" Grid.Row="1"/>
 
-                    <Button Text="Ajustes"
-                    Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
-                </Grid>
+            <Label 
+                Text="{x:Static local:LanguageResource.EmployerName}"
+                Grid.Column="2" Grid.Row="0"/>
 
-                <HorizontalStackLayout Spacing="10" Margin="0, 10, 0, 0">
-                    <HorizontalStackLayout>
-                        <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
-                        <TimePicker x:Name="timePicker" Format="HH:mm"/>
-                    </HorizontalStackLayout>
+            <Label 
+                x:Name="employerName" 
+                Grid.Column="3" Grid.Row="0"/>
 
-                    <HorizontalStackLayout>
-                        <Label VerticalOptions="Center">Entry</Label>
-                        <Switch x:Name="isEntry" WidthRequest="100"/>
-                    </HorizontalStackLayout>
-                </HorizontalStackLayout>
-
-                <Button Text="Save" Clicked="LogTimeClicked"/>
-
-            </VerticalStackLayout>
-
-            <ScrollView Grid.Row="1" Margin="10">
-                <Grid x:Name="logContainer" HorizontalOptions="FillAndExpand" ColumnSpacing="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border BackgroundColor="Green" Grid.Column="0" StrokeShape="RoundRectangle 10">
-                        <VerticalStackLayout Grid.Column="0" 
-                      Spacing="10" 
-                      x:Name="entry" 
-                      HorizontalOptions="FillAndExpand"/>
-                    </Border>
-
-                    <Border BackgroundColor="Red" Grid.Column="1" StrokeShape="RoundRectangle 10">
-                        <VerticalStackLayout Grid.Column="1" 
-                      Spacing="10" 
-                      x:Name="exit" 
-                      HorizontalOptions="FillAndExpand"/>
-                    </Border>
-                </Grid>
-            </ScrollView>
+            <Label 
+                Text="{x:Static local:LanguageResource.employerNif}"
+                Grid.Column="2" Grid.Row="1"/>
+            
+            <Label 
+                x:Name="companyNif" 
+                Grid.Column="3" Grid.Row="1"/>
         </Grid>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+            <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
+            <TimePicker x:Name="timePicker" Format="HH:mm"/>
+
+            <Label Text="{x:Static local:LanguageResource.IsEntry}" VerticalOptions="Center"/>
+            <Switch x:Name="isEntry"/>
+
+            <Button Text="{x:Static local:LanguageResource.UpdateWorkerData}" HorizontalOptions="End"/>
+        </HorizontalStackLayout>
+
+        <Button Text="{x:Static local:LanguageResource.Save}" Clicked="LogTimeClicked"/>
+
+        <ScrollView>
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border BackgroundColor="Green" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout x:Name="entry" HorizontalOptions="FillAndExpand"/>
+                </Border>
+
+                <Border BackgroundColor="Red" StrokeShape="RoundRectangle 10"
+                    Grid.Column="1">
+                    <VerticalStackLayout x:Name="exit" HorizontalOptions="FillAndExpand"/>
+                </Border>
+            </Grid>
+        </ScrollView>
+
+
     </VerticalStackLayout>
 </ContentPage>

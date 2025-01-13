@@ -61,11 +61,65 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a  Admin Settings.
+        /// </summary>
+        internal static string AdminSettings {
+            get {
+                return ResourceManager.GetString("AdminSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Work Time Log.
         /// </summary>
         internal static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change Password.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create New User.
+        /// </summary>
+        internal static string CreateUser {
+            get {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Employer: .
+        /// </summary>
+        internal static string EmployerName {
+            get {
+                return ResourceManager.GetString("EmployerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Employer&apos;s NIF:.
+        /// </summary>
+        internal static string employerNif {
+            get {
+                return ResourceManager.GetString("employerNif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Is Entry.
+        /// </summary>
+        internal static string IsEntry {
+            get {
+                return ResourceManager.GetString("IsEntry", resourceCulture);
             }
         }
         
@@ -79,6 +133,15 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Manage Users.
+        /// </summary>
+        internal static string ManageUsers {
+            get {
+                return ResourceManager.GetString("ManageUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         internal static string Password {
@@ -88,11 +151,65 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Select User.
         /// </summary>
         internal static string SelectUser {
             get {
                 return ResourceManager.GetString("SelectUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Update Employer Data.
+        /// </summary>
+        internal static string UpdateEmployerData {
+            get {
+                return ResourceManager.GetString("UpdateEmployerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Update Data.
+        /// </summary>
+        internal static string UpdateWorkerData {
+            get {
+                return ResourceManager.GetString("UpdateWorkerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker Log.
+        /// </summary>
+        internal static string WorkerLog {
+            get {
+                return ResourceManager.GetString("WorkerLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker Name:.
+        /// </summary>
+        internal static string WorkerName {
+            get {
+                return ResourceManager.GetString("WorkerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Worker&apos;s NIF:.
+        /// </summary>
+        internal static string WorkerNif {
+            get {
+                return ResourceManager.GetString("WorkerNif", resourceCulture);
             }
         }
     }

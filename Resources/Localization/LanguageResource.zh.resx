@@ -117,16 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdminSettings" xml:space="preserve">
+    <value>管理员设置</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>工时登记表</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>更换密码</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>创建新用户</value>
+  </data>
+  <data name="EmployerName" xml:space="preserve">
+    <value>雇主名:</value>
+  </data>
+  <data name="employerNif" xml:space="preserve">
+    <value>雇主NIF:</value>
+  </data>
+  <data name="WorkerNif" xml:space="preserve">
+    <value>工人 NIF: </value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>登录</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>管理账户表</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>密码</value>
   </data>
   <data name="SelectUser" xml:space="preserve">
     <value>选择账号</value>
+  </data>
+  <data name="UpdateEmployerData" xml:space="preserve">
+    <value>更新雇主信息</value>
+  </data>
+  <data name="WorkerLog" xml:space="preserve">
+    <value>工人登记信息</value>
+  </data>
+  <data name="WorkerName" xml:space="preserve">
+    <value>工人姓名:</value>
+  </data>
+  <data name="IsEntry" xml:space="preserve">
+    <value>上班</value>
+  </data>
+  <data name="UpdateWorkerData" xml:space="preserve">
+    <value>修改信息</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
   </data>
 </root>

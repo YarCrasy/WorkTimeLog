@@ -65,15 +65,15 @@ public partial class UsersListPage : ContentPage
         }
     }
 
-    private async void DeleteUserButtonClicked(object sender, EventArgs e)
+    private async void DeleteUserButtonClicked(object? sender, EventArgs e)
     {
-        Button deleteButton = (Button)sender;
+        Button deleteButton = (Button)sender!;
         Border userLayout = (Border)deleteButton.Parent.Parent;
         string userId = userLayout.ClassId;
 
         if (string.IsNullOrEmpty(userId))
         {
-            await DisplayAlert("Error", "ID nulo o vac�o.", "OK");
+            await DisplayAlert("Error", "ID nulo o vacío.", "OK");
             return;
         }
 

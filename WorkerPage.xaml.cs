@@ -14,11 +14,14 @@ public partial class WorkerPage : ContentPage
 
     private void InitializeUI()
     {
-        workerName.Text += user.NameSurname;
-        workerNif.Text += user.Nif;
+        workerName.Text = user.NameSurname;
+        workerNif.Text = user.Nif;
         datePicker.Date = DateTime.Now.Date;
         timePicker.Time = DateTime.Now.TimeOfDay;
         isEntry.IsToggled = !user.LastIsEntry;
+
+        employerName.Text = Database.employerData.name;
+        companyNif.Text = Database.employerData.nif;
     }
 
     private async void LogTimeClicked(object sender, EventArgs e)

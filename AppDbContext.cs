@@ -1,6 +1,5 @@
 using SQLite;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace WorkTimeLog
 {
@@ -18,7 +17,7 @@ namespace WorkTimeLog
             LastIsEntry = false
         };
 
-        internal static Company companyData = new();
+        internal Company employerData = new();
         private readonly string employerDataPath;
 
         public AppDbContext()
@@ -72,13 +71,13 @@ namespace WorkTimeLog
         {
             string json = File.ReadAllText(employerDataPath);
             Company? aux = JsonSerializer.Deserialize<Company>(json);
-            companyData = aux ?? companyData;
+            employerData = aux ?? employerData;
         }
 
         public void SaveEmployerData()
         {
-            Debug.WriteLine("SAVING EMPLOYER " + companyData.name + " " + companyData.nif);
-            string json = JsonSerializer.Serialize(companyData);
+            Debug.WriteLine("SAVING EMPLOYER " + employerData.name + " " + employerData.nif);
+            string json = JsonSerializer.Serialize(employerData);
             Debug.WriteLine("SAVED DATA " + json);
             File.WriteAllText(employerDataPath, json);
         }

@@ -2,7 +2,7 @@ namespace WorkTimeLog;
 
 public partial class UpdateEmployerPage : ContentPage
 {
-    AdminPage adminPage;
+    readonly AdminPage adminPage;
 
     public UpdateEmployerPage(AdminPage a)
 	{
@@ -12,8 +12,8 @@ public partial class UpdateEmployerPage : ContentPage
 
     private async void UpdateButtonClicked(object sender, EventArgs e)
     {
-        companyData.nif = nifInput.Text;
-        companyData.name = employerNameInput.Text;
+        Database.employerData.nif = nifInput.Text;
+        Database.employerData.name = employerNameInput.Text;
 
         Database.SaveEmployerData();
         adminPage.DisplayCompanyData();
