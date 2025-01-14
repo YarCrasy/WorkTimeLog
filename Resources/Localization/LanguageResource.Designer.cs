@@ -115,6 +115,15 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Is Entry.
         /// </summary>
         internal static string IsEntry {
@@ -138,6 +147,15 @@ namespace WorkTimeLog.Resources.Localization {
         internal static string ManageUsers {
             get {
                 return ResourceManager.GetString("ManageUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nif is null or empty.
+        /// </summary>
+        internal static string NifNullMsg {
+            get {
+                return ResourceManager.GetString("NifNullMsg", resourceCulture);
             }
         }
         
@@ -183,6 +201,15 @@ namespace WorkTimeLog.Resources.Localization {
         internal static string UpdateWorkerData {
             get {
                 return ResourceManager.GetString("UpdateWorkerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User Not Found in Database.
+        /// </summary>
+        internal static string UserNotFoundMsg {
+            get {
+                return ResourceManager.GetString("UserNotFoundMsg", resourceCulture);
             }
         }
         

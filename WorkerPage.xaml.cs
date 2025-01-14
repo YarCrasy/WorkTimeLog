@@ -3,11 +3,13 @@ namespace WorkTimeLog;
 public partial class WorkerPage : ContentPage
 {
     readonly User user;
+    readonly bool canEdit;
 
-    public WorkerPage(User u)
+    public WorkerPage(User u, bool editable = true)
     {
         InitializeComponent();
         user = u;
+        canEdit = editable;
         InitializeUI();
         LoadWorkLogs();
     }
@@ -16,12 +18,20 @@ public partial class WorkerPage : ContentPage
     {
         workerName.Text = user.NameSurname;
         workerNif.Text = user.Nif;
-        datePicker.Date = DateTime.Now.Date;
-        timePicker.Time = DateTime.Now.TimeOfDay;
-        isEntry.IsToggled = !user.LastIsEntry;
 
         employerName.Text = Database.employerData.name;
         companyNif.Text = Database.employerData.nif;
+
+        if (!canEdit)
+        {
+            editableInputs.Clear();
+        }
+        else
+        {
+            datePicker.Date = DateTime.Now.Date;
+            timePicker.Time = DateTime.Now.TimeOfDay;
+            isEntry.IsToggled = !user.LastIsEntry;
+        }
     }
 
     private async void LogTimeClicked(object sender, EventArgs e)

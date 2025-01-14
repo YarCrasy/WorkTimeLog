@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls.Shapes;
+using WorkTimeLog.Resources.Localization;
 
 namespace WorkTimeLog;
 
@@ -20,7 +21,7 @@ public partial class UsersListPage : ContentPage
 
         foreach (var user in users)
         {
-            var userLabel = new Label
+            Label userLabel = new()
             {
                 Text = user.NameSurname + " (" + user.Nif + ")",
                 Margin = 10,
@@ -30,7 +31,17 @@ public partial class UsersListPage : ContentPage
                 HorizontalOptions = LayoutOptions.Start
             };
 
-            var deleteButton = new Button
+            Button infoButton = new()
+            {
+                Margin = 10,
+                Padding = 3,
+                HorizontalOptions = LayoutOptions.End,
+                WidthRequest = 15,
+            };
+            infoButton.Clicked += InfoButtonClicked;
+            infoButton.ImageSource = new FileImageSource { File = "user_info_icon.png" };
+
+            Button deleteButton = new()
             {
                 Margin = 10,
                 Padding = 3,
@@ -43,12 +54,14 @@ public partial class UsersListPage : ContentPage
 
             var grid = new Grid();
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            grid.ColumnDefinitions.Add(new());
-            grid.ColumnDefinitions.Add(new());
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
 
             grid.Children.Add(userLabel);
+            grid.Children.Add(infoButton);
             grid.Children.Add(deleteButton);
             Grid.SetColumn(userLabel, 0);
+            Grid.SetColumn(infoButton, 1);
             Grid.SetColumn(deleteButton, 2);
 
             Border userLayout = new()
@@ -73,14 +86,14 @@ public partial class UsersListPage : ContentPage
 
         if (string.IsNullOrEmpty(userId))
         {
-            await DisplayAlert("Error", "ID nulo o vacío.", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.NifNullMsg, "OK");
             return;
         }
 
         User? user = await Database.GetUserByNifAsync(userId);
         if (user == null)
         {
-            await DisplayAlert("Error", "No se pudo encontrar el usuario en la base de datos.", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.UserNotFoundMsg, "OK");
             return;
         }
 
@@ -89,5 +102,15 @@ public partial class UsersListPage : ContentPage
         main.RemoveUser(user);
 
         await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", "OK");
+    }
+
+    private async void InfoButtonClicked(object? sender, EventArgs e)
+    {
+        Button infoButton = (Button)sender!;
+        Border userLayout = (Border)infoButton.Parent.Parent;
+        string userId = userLayout.ClassId;
+        User? user = await Database.GetUserByNifAsync(userId);
+
+        await Navigation.PushAsync(new WorkerPage(user, false));
     }
 }

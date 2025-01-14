@@ -10,7 +10,7 @@
             SemanticProperties.HeadingLevel="Level1" />
 
         
-        <Grid HorizontalOptions="StartAndExpand" ColumnSpacing="15" RowSpacing="10">
+        <Grid HorizontalOptions="Center" ColumnSpacing="15" RowSpacing="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
@@ -54,17 +54,19 @@
                 Grid.Column="3" Grid.Row="1"/>
         </Grid>
 
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-            <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
-            <TimePicker x:Name="timePicker" Format="HH:mm"/>
+        <VerticalStackLayout x:Name="editableInputs" Spacing="10">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <DatePicker x:Name="datePicker" VerticalOptions="Center"/>
+                <TimePicker x:Name="timePicker" Format="HH:mm"/>
 
-            <Label Text="{x:Static local:LanguageResource.IsEntry}" VerticalOptions="Center"/>
-            <Switch x:Name="isEntry"/>
+                <Label Text="{x:Static local:LanguageResource.IsEntry}" VerticalOptions="Center"/>
+                <Switch x:Name="isEntry"/>
 
-            <Button Text="{x:Static local:LanguageResource.UpdateWorkerData}" HorizontalOptions="End"/>
-        </HorizontalStackLayout>
+                <Button Text="{x:Static local:LanguageResource.UpdateWorkerData}" HorizontalOptions="End"/>
+            </HorizontalStackLayout>
 
-        <Button Text="{x:Static local:LanguageResource.Save}" Clicked="LogTimeClicked"/>
+            <Button Text="{x:Static local:LanguageResource.Save}" Clicked="LogTimeClicked"/>
+        </VerticalStackLayout>
 
         <ScrollView>
             <Grid ColumnSpacing="10">

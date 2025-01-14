@@ -168,4 +168,13 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="NifNullMsg" xml:space="preserve">
+    <value>Nif is null or empty</value>
+  </data>
+  <data name="UserNotFoundMsg" xml:space="preserve">
+    <value>User Not Found in Database</value>
+  </data>
 </root>

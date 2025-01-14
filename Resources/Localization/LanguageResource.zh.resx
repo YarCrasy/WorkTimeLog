@@ -168,4 +168,10 @@
   <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="NifNullMsg" xml:space="preserve">
+    <value>Nif不能为空</value>
+  </data>
 </root>

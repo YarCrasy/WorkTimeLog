@@ -9,6 +9,9 @@ namespace WorkTimeLog
         public string NameSurname { get; set; } = "";
         public string Password { get; set; } = "";
         public bool LastIsEntry { get; set; }
+        public bool IsDeleting { get; set; } = false;
+
+        public DateTime DeleteDate { get; set; }
 
         public bool IsAdmin()
         {
