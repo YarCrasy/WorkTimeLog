@@ -26,7 +26,7 @@ public partial class RegisterPage : ContentPage
         {
             await Database.InsertUserAsync(newUser);
             mainPage.AddUser(newUser);
-            await DisplayAlert("Success", "User Created correctly", "OK");
+            await DisplayAlert(LanguageResource.Success, LanguageResource.UserCreatedMsg, LanguageResource.Confirm);
             await Navigation.PopAsync();
         }
     }
@@ -36,22 +36,22 @@ public partial class RegisterPage : ContentPage
         if (string.IsNullOrEmpty(user.Nif) || string.IsNullOrEmpty(user.NameSurname) || 
             string.IsNullOrEmpty(user.Password))
         {
-            await DisplayAlert("Error", "you must fill all the fields", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.NullOrEmptyMsg, LanguageResource.Confirm);
             return false;
         }
         if(!IsValidNif(user.Nif))
         {
-            await DisplayAlert("Error", "Nif is not valid", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.NifNotValid, LanguageResource.Confirm);
             return false;
         }
         if (await Database.UserExist(user))
         {
-            await DisplayAlert("Error", "User already exists", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.UserExists, LanguageResource.Confirm);
             return false;
         }
         if (user.Password != confirmPassword)
         {
-            await DisplayAlert("Error", "Password are not the same", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.PasswordConfirmErr, LanguageResource.Confirm);
             return false;
         }
         return true;

@@ -86,14 +86,14 @@ public partial class UsersListPage : ContentPage
 
         if (string.IsNullOrEmpty(userId))
         {
-            await DisplayAlert(LanguageResource.Error, LanguageResource.NifNullMsg, "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.NullOrEmptyMsg, LanguageResource.Confirm);
             return;
         }
 
         User? user = await Database.GetUserByNifAsync(userId);
         if (user == null)
         {
-            await DisplayAlert(LanguageResource.Error, LanguageResource.UserNotFoundMsg, "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.UserNotFoundMsg, LanguageResource.Confirm);
             return;
         }
 
@@ -101,7 +101,7 @@ public partial class UsersListPage : ContentPage
         UserList.Children.Remove(userLayout);
         main.RemoveUser(user);
 
-        await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", "OK");
+        await DisplayAlert("Usuario Eliminado", "El usuario ha sido eliminado correctamente.", LanguageResource.Confirm);
     }
 
     private async void InfoButtonClicked(object? sender, EventArgs e)

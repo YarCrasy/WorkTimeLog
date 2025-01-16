@@ -48,7 +48,7 @@ public partial class WorkerPage : ContentPage
         await Database.UpdateUserAsync(user);
 
         AddLogToUI(workLog);
-        await DisplayAlert("Éxito", "Fecha y hora registrado correctamente.", "OK");
+        await DisplayAlert(LanguageResource.Success, "Fecha y hora registrado correctamente.", LanguageResource.Confirm;
         await Navigation.PopAsync();
     }
 
@@ -69,7 +69,7 @@ public partial class WorkerPage : ContentPage
 
         Label entryLabel = new()
         {
-            Text = "Entrada",
+            Text = LanguageResource.Entry,
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -77,7 +77,7 @@ public partial class WorkerPage : ContentPage
 
         Label exitLabel = new()
         {
-            Text = "Salida",
+            Text = LanguageResource.Exit,
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -99,11 +99,11 @@ public partial class WorkerPage : ContentPage
                 await DisplayPromptAsync(
                     "ChangePassword",
                     "Enter New Password",
-                    "Accept", "Cancel",
+                    LanguageResource.Confirm, "Cancel",
                     "New Password", 18, Keyboard.Default);
 
         if (!user.ChangePassword(newPassword)) return;
-        else await DisplayAlert("Success", "Password Changed Successfully", "OK");
+        else await DisplayAlert(LanguageResource.Success, "Password Changed Successfully", LanguageResource.Confirm);
 
         await Database.UpdateUserAsync(user);
     }

@@ -1,4 +1,6 @@
-﻿namespace WorkTimeLog
+﻿using WorkTimeLog.Resources.Localization;
+
+namespace WorkTimeLog
 {
     public partial class MainPage : ContentPage
     {
@@ -38,7 +40,7 @@
             var userName = (string)UserPicker.SelectedItem;
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password.Text))
             {
-                await DisplayAlert("Error", "you must fill all the fields", "OK");
+                await DisplayAlert(LanguageResource.Error, LanguageResource.NullOrEmptyMsg, LanguageResource.Confirm);
                 return;
             }
 
@@ -51,7 +53,7 @@
             }
             else
             {
-                await DisplayAlert("Error", "User does not exist or password incorrect", "OK");
+                await DisplayAlert(LanguageResource.Error, LanguageResource.UserNotFoundMsg, LanguageResource.Confirm);
             }
             password.Text = string.Empty;
         }

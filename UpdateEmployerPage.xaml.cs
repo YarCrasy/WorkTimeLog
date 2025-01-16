@@ -1,3 +1,5 @@
+using WorkTimeLog.Resources.Localization;
+
 namespace WorkTimeLog;
 
 public partial class UpdateEmployerPage : ContentPage
@@ -18,7 +20,7 @@ public partial class UpdateEmployerPage : ContentPage
         Database.SaveEmployerData();
         adminPage.DisplayCompanyData();
 
-        await DisplayAlert("Comfirmation", "Employer data updated correctly", "OK");
+        await DisplayAlert(LanguageResource.Success, LanguageResource.UpdatedMsg, LanguageResource.Confirm);
         await Navigation.PopAsync();
     }
 }

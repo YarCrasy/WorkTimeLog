@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdminSettings" xml:space="preserve">
-    <value> Admin Settings</value>
-  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>Work Time Log</value>
   </data>
@@ -171,10 +168,46 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="NifNullMsg" xml:space="preserve">
-    <value>Nif is null or empty</value>
+  <data name="NullOrEmptyMsg" xml:space="preserve">
+    <value>There is null or empty fields</value>
   </data>
   <data name="UserNotFoundMsg" xml:space="preserve">
     <value>User Not Found in Database</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="UpdatedMsg" xml:space="preserve">
+    <value>Data Updated Correctly</value>
+  </data>
+  <data name="UserDeleted" xml:space="preserve">
+    <value>User Deleted</value>
+  </data>
+  <data name="Entry" xml:space="preserve">
+    <value>Entry</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="AdminSettings" xml:space="preserve">
+    <value> Admin Settings</value>
+  </data>
+  <data name="NifNotValid" xml:space="preserve">
+    <value>Nif is not valid</value>
+  </data>
+  <data name="UserExists" xml:space="preserve">
+    <value>User already exists</value>
+  </data>
+  <data name="PasswordConfirmErr" xml:space="preserve">
+    <value>Password confirmation doen't match</value>
+  </data>
+  <data name="UserCreatedMsg" xml:space="preserve">
+    <value>User Created correctly</value>
+  </data>
+  <data name="EmployerUpdatedMsg" xml:space="preserve">
+    <value>Employer data must be configured first</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Accept</value>
   </data>
 </root>

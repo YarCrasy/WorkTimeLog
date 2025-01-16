@@ -30,7 +30,7 @@ public partial class AdminPage : ContentPage
     {
         if (Database.employerData.IsEmpty())
         {
-            await DisplayAlert("Error", "Company data is not set yet", "OK");
+            await DisplayAlert(LanguageResource.Error, LanguageResource.EmployerUpdatedMsg, LanguageResource.Confirm);
             return;
         }
 
@@ -48,11 +48,11 @@ public partial class AdminPage : ContentPage
                 await DisplayPromptAsync(
                     "Cambiar contraseña",
                     "Introduce la nueva contraseña",
-                    "Aceptar", "Cancelar",
+                    LanguageResource.Confirm, "Cancelar",
                     "Nueva contraseña", 18, Keyboard.Default);
 
         if (!admin.ChangePassword(newPassword)) return;
-        else await DisplayAlert("Éxito", "Contraseña cambiada correctamente.", "OK");
+        else await DisplayAlert(LanguageResource.Success, "Contraseña cambiada correctamente.", LanguageResource.Confirm);
 
         await Database.UpdateUserAsync(admin);
     }

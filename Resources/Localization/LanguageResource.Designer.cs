@@ -88,6 +88,15 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create New User.
         /// </summary>
         internal static string CreateUser {
@@ -115,11 +124,38 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Employer data must be configured first.
+        /// </summary>
+        internal static string EmployerUpdatedMsg {
+            get {
+                return ResourceManager.GetString("EmployerUpdatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Entry.
+        /// </summary>
+        internal static string Entry {
+            get {
+                return ResourceManager.GetString("Entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error.
         /// </summary>
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Exit.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
         
@@ -151,11 +187,20 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Nif is null or empty.
+        ///   Busca una cadena traducida similar a Nif is not valid.
         /// </summary>
-        internal static string NifNullMsg {
+        internal static string NifNotValid {
             get {
-                return ResourceManager.GetString("NifNullMsg", resourceCulture);
+                return ResourceManager.GetString("NifNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a There is null or empty fields.
+        /// </summary>
+        internal static string NullOrEmptyMsg {
+            get {
+                return ResourceManager.GetString("NullOrEmptyMsg", resourceCulture);
             }
         }
         
@@ -165,6 +210,15 @@ namespace WorkTimeLog.Resources.Localization {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password confirmation doen&apos;t match.
+        /// </summary>
+        internal static string PasswordConfirmErr {
+            get {
+                return ResourceManager.GetString("PasswordConfirmErr", resourceCulture);
             }
         }
         
@@ -187,6 +241,24 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Data Updated Correctly.
+        /// </summary>
+        internal static string UpdatedMsg {
+            get {
+                return ResourceManager.GetString("UpdatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Update Employer Data.
         /// </summary>
         internal static string UpdateEmployerData {
@@ -201,6 +273,33 @@ namespace WorkTimeLog.Resources.Localization {
         internal static string UpdateWorkerData {
             get {
                 return ResourceManager.GetString("UpdateWorkerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User Created correctly.
+        /// </summary>
+        internal static string UserCreatedMsg {
+            get {
+                return ResourceManager.GetString("UserCreatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User Deleted.
+        /// </summary>
+        internal static string UserDeleted {
+            get {
+                return ResourceManager.GetString("UserDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User already exists.
+        /// </summary>
+        internal static string UserExists {
+            get {
+                return ResourceManager.GetString("UserExists", resourceCulture);
             }
         }
         
