@@ -106,6 +106,15 @@ namespace WorkTimeLog.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dark Mode.
+        /// </summary>
+        internal static string DarkMode {
+            get {
+                return ResourceManager.GetString("DarkMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Employer: .
         /// </summary>
         internal static string EmployerName {
@@ -165,6 +174,15 @@ namespace WorkTimeLog.Resources.Localization {
         internal static string IsEntry {
             get {
                 return ResourceManager.GetString("IsEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Language.
+        /// </summary>
+        internal static string LanguageSelector {
+            get {
+                return ResourceManager.GetString("LanguageSelector", resourceCulture);
             }
         }
         

@@ -18,13 +18,14 @@ namespace WorkTimeLog
         };
 
         internal Company employerData = new();
-        private readonly string employerDataPath;
+        private string employerDataPath, dbPath;
 
         public AppDbContext()
         {
             Database = this;
-            string localPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string dbPath = Path.Combine(localPath, "worktimelog.db");
+            string dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"\\WorkTimeLog\\";
+            string localPath = Directory.CreateDirectory(dataPath).FullName;
+            dbPath = Path.Combine(localPath, "worktimelog.db");
             employerDataPath = Path.Combine(localPath, "employerData.json");
 
             _database = new SQLiteAsyncConnection(dbPath);

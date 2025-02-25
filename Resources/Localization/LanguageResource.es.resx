@@ -210,4 +210,10 @@
   <data name="Confirm" xml:space="preserve">
     <value>Aceptar</value>
   </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Modo Oscuro</value>
+  </data>
+  <data name="LanguageSelector" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
 </root>

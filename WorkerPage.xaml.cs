@@ -48,7 +48,7 @@ public partial class WorkerPage : ContentPage
         await Database.UpdateUserAsync(user);
 
         AddLogToUI(workLog);
-        await DisplayAlert(LanguageResource.Success, "Fecha y hora registrado correctamente.", LanguageResource.Confirm;
+        await DisplayAlert(LanguageResource.Success, "Fecha y hora registrado correctamente.", LanguageResource.Confirm);
         await Navigation.PopAsync();
     }
 
