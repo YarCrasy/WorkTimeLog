@@ -1,139 +1,123 @@
 using SQLite;
 using System.Text.Json;
 
-namespace WorkTimeLog
+namespace WorkTimeLog;
+public class AppDbContext
 {
-    public class AppDbContext
+    internal static AppDbContext Database = new();
+
+    private readonly SQLiteAsyncConnection _database;
+
+    private readonly User admin = new()
     {
-        internal static AppDbContext Database = new();
+        Nif = "Admin",
+        NameSurname = "Admin",
+        Password = "123",
+        LastIsEntry = false
+    };
 
-        private readonly SQLiteAsyncConnection _database;
+    internal Company employerData = new();
+    private readonly string employerDataPath, dbPath;
 
-        private readonly User admin = new()
+    public AppDbContext()
+    {
+        string dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\WorkTimeLog\\";
+        string localPath = Directory.CreateDirectory(dataPath).FullName;
+        dbPath = Path.Combine(localPath, "worktimelog.db");
+        employerDataPath = Path.Combine(localPath, "employerData.json");
+        Database = this;
+        try
         {
-            Nif = "Admin",
-            NameSurname = "Admin",
-            Password = "123",
-            LastIsEntry = false
-        };
-
-        internal Company employerData = new();
-        private string employerDataPath, dbPath;
-
-        public AppDbContext()
+            _database = new SQLiteAsyncConnection(dbPath);
+            if (_database.Table<User>().FirstOrDefaultAsync().IsFaulted||
+                _database.Table<WorkLog>().FirstOrDefaultAsync().IsFaulted)
+            InitDatabase();
+        }
+        catch (Exception)
         {
-            Database = this;
-            string dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"\\WorkTimeLog\\";
-            string localPath = Directory.CreateDirectory(dataPath).FullName;
-            dbPath = Path.Combine(localPath, "worktimelog.db");
-            employerDataPath = Path.Combine(localPath, "employerData.json");
+            _database?.CloseAsync().Wait();
+            File.Delete(dbPath);
+            File.Delete(employerDataPath);
 
             _database = new SQLiteAsyncConnection(dbPath);
-
-            if (IsDatabaseCorrupted()) InitDatabase();
-
-            InitEmployerData();
+            InitDatabase();
         }
+    }
 
-        private bool IsDatabaseCorrupted()
-        {
-            bool result = false;
-            try
-            {
-                var user = _database.Table<User>().FirstOrDefaultAsync().Result;
-                var workLog = _database.Table<WorkLog>().FirstOrDefaultAsync().Result;
-            }
-            catch (Exception)
-            {
-                result = true;
-            }
-            return result;
-        }
+    private void InitDatabase()
+    {
+        _database.CreateTableAsync<User>().Wait();
+        InsertUserAsync(admin).Wait();
+        _database.CreateTableAsync<WorkLog>().Wait();
 
-        private void InitDatabase()
-        {
-            _database.CreateTableAsync<User>().Wait();
-            InsertUserAsync(admin).Wait();
-            _database.CreateTableAsync<WorkLog>().Wait();
-        }
+        //load Employer data if exists, or create new one
+        if (File.Exists(employerDataPath)) LoadEmployerData();
+        else SaveEmployerData();
+    }
 
-        //load company data if exists, or create new company
-        private void InitEmployerData()
-        {
-            Debug.WriteLine("INITIALIZING EMPLOYER " + employerDataPath);
-            if (File.Exists(employerDataPath))
-            {
-                LoadEmployerData();
-            }
-            else SaveEmployerData();
-        }
+    private void LoadEmployerData()
+    {
+        string json = File.ReadAllText(employerDataPath);
+        Company? aux = JsonSerializer.Deserialize<Company>(json);
+        employerData = aux ?? employerData;
+    }
 
-        private void LoadEmployerData()
-        {
-            string json = File.ReadAllText(employerDataPath);
-            Company? aux = JsonSerializer.Deserialize<Company>(json);
-            employerData = aux ?? employerData;
-        }
+    public void SaveEmployerData()
+    {
+        string json = JsonSerializer.Serialize(employerData);
+        File.WriteAllText(employerDataPath, json);
+    }
 
-        public void SaveEmployerData()
-        {
-            Debug.WriteLine("SAVING EMPLOYER " + employerData.name + " " + employerData.nif);
-            string json = JsonSerializer.Serialize(employerData);
-            Debug.WriteLine("SAVED DATA " + json);
-            File.WriteAllText(employerDataPath, json);
-        }
+    public Task<List<User>> GetUsersAsync()
+    {
+        return _database.Table<User>().ToListAsync();
+    }
 
-        public Task<List<User>> GetUsersAsync()
-        {
-            return _database.Table<User>().ToListAsync();
-        }
+    public Task<int> InsertUserAsync(User user)
+    {
+        return _database.InsertAsync(user);
+    }
 
-        public Task<int> InsertUserAsync(User user)
-        {
-            return _database.InsertAsync(user);
-        }
+    public Task<int> DropUserAsync(User user)
+    {
+        if (user.IsAdmin()) return Task.FromResult(0);
+        return _database.DeleteAsync(user);
+    }
 
-        public Task<int> DropUserAsync(User user)
-        {
-            if (user.IsAdmin()) return Task.FromResult(0);
-            return _database.DeleteAsync(user);
-        }
+    public Task<User> GetUserByNifAsync(string nif)
+    {
+        return _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
+    }
 
-        public Task<User> GetUserByNifAsync(string nif)
-        {
-            return _database.Table<User>().Where(u => u.Nif == nif).FirstOrDefaultAsync();
-        }
+    public Task<User> GetUserByNameAsync(string name)
+    {
+        return _database.Table<User>().Where(u => u.NameSurname == name).FirstOrDefaultAsync();
+    }
 
-        public Task<User> GetUserByNameAsync(string name)
-        {
-            return _database.Table<User>().Where(u => u.NameSurname == name).FirstOrDefaultAsync();
-        }
+    public Task<bool> UserExist(User user)
+    {
+        bool result = false;
+        if (GetUserByNifAsync(user.Nif).Result != null) result = true;
+        return Task.FromResult(result);
+    }
 
-        public Task<bool> UserExist(User user)
-        {
-            bool result = false;
-            if (GetUserByNifAsync(user.Nif).Result != null) result = true;
-            return Task.FromResult(result);
-        }
+    public Task<int> InsertWorkLogAsync(WorkLog workLog)
+    {
+        return _database.InsertAsync(workLog);
+    }
 
-        public Task<int> InsertWorkLogAsync(WorkLog workLog)
-        {
-            return _database.InsertAsync(workLog);
-        }
+    public Task<List<WorkLog>> GetWorkLogsAsync()
+    {
+        return _database.Table<WorkLog>().ToListAsync();
+    }
 
-        public Task<List<WorkLog>> GetWorkLogsAsync()
-        {
-            return _database.Table<WorkLog>().ToListAsync();
-        }
+    public Task<int> UpdateUserAsync(User user)
+    {
+        return _database.UpdateAsync(user);
+    }
 
-        public Task<int> UpdateUserAsync(User user)
-        {
-            return _database.UpdateAsync(user);
-        }
-
-        public Task<List<WorkLog>> GetWorkLogsByUserNifAsync(string userNif)
-        {
-            return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
-        }
+    public Task<List<WorkLog>> GetWorkLogsByUserNifAsync(string userNif)
+    {
+        return _database.Table<WorkLog>().Where(w => w.UserNif == userNif).ToListAsync();
     }
 }
